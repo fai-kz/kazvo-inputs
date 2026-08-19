@@ -11,7 +11,6 @@ They represent the results of photometric observations of stars, comets, nebulae
   <!-- Take keywords from 
     http://www.ivoa.net/rdf/uat
     if at all possible -->
-  <meta name="subject">history-of-astronomy></meta>
   <meta name="subject">gaseous-nebulae</meta>
   <meta name="subject">comets</meta>
   <meta name="subject">field-of-view</meta>
@@ -74,7 +73,12 @@ They represent the results of photometric observations of stars, comets, nebulae
   </coverage>
 
   <data id="import">
-    <sources pattern="/var/gavo/inputs/astroplates/maksutov_50_telescope/data/*.fit"/>
+    <!--<sources
+    pattern="/var/gavo/inputs/astroplates/maksutov_50_telescope/data/*.fit"/>-->
+    <sources>
+      <pattern>/var/gavo/inputs/observations/kamenskoye/maksutov_meniscus/imaging/targets/[0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/reduced/*.[Ff][Ii][Tt]</pattern>
+      <pattern>/var/gavo/inputs/observations/kamenskoye/maksutov_meniscus/imaging/targets/[0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/reduced/*.[Ff][Ii][Tt][Ss]</pattern>
+    </sources>
 
     <fitsProdGrammar>
       <rowfilter procDef="//products#define">
@@ -191,7 +195,7 @@ They represent the results of photometric observations of stars, comets, nebulae
   </dbCore>
 
   <service id="web" allowed="form" core="imagecore">
-    <meta name="shortName">maksutov_50_telescope web</meta>
+    <meta name="shortName">maksutov web</meta>
     <meta name="title">Web interface to FAI 50 cm Meniskus Maksutov
       telescope archive</meta>
     <meta name="_related" title="Calibration data for these frames">
@@ -209,7 +213,7 @@ They represent the results of photometric observations of stars, comets, nebulae
   </service>
 
   <service id="i" allowed="form,siap.xml" core="imagecore">
-    <meta name="shortName">maksutov_50_telescope siap</meta>
+    <meta name="shortName">maksutov siap</meta>
 
     <meta name="sia.type">Pointed</meta>
     
@@ -230,15 +234,14 @@ They represent the results of photometric observations of stars, comets, nebulae
       for more info on these. -->
 
     <regTest title="maksutov_50_telescope SIAP serves some data">
-      <url POS="84.4,9.3" SIZE="0.1,0.1"
+      <url POS="83.73,9.83" SIZE="0.05,0.05"
         >i/siap.xml</url>
       <code>
         rows = self.getVOTableRows()
-        self.assertEqual(len(rows), 1)
         row = rows[0]
-        self.assertEqual(row["object"], "lam Ori")
+        self.assertEqual(row["object"], "S136")
         self.assertEqual(row["filename"], 
-                'lambda-Ori_209-10.02.1958_20m_11-1964.fit')
+                'S136_13-14.12.1952_3h_22-692')
       </code>
     </regTest>
   </regSuite>

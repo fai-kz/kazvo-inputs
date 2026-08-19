@@ -2,3 +2,4 @@ data
 *.swp
 astroplates
 __pycache__/
+ccd_observations/

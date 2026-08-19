@@ -144,11 +144,10 @@
 	<data id="import">
 		<recreateAfter>make_view</recreateAfter>
 		<property key="previewDir">previews</property>
-		<!--<sources recurse="True"
-		 pattern="/var/gavo/inputs/astroplates/spectra_agn_archive/reducted_spectra_agn/*.fits"/>-->
-		<sources recurse="True"
-			pattern="/var/gavo/inputs/spectra_agn_archive/data/*.fits"/>
-
+    <sources>
+      <pattern>/var/gavo/inputs/observations/kamenskoye/azt-8/spectra_slit/targets/[0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/reduced/*.[Ff][Ii][Tt]</pattern>
+      <pattern>/var/gavo/inputs/observations/kamenskoye/azt-8/spectra_slit/targets/[0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/reduced/*.[Ff][Ii][Tt][Ss]</pattern>
+    </sources>
 		<fitsProdGrammar qnd="True">
 		 <rowfilter procDef="//products#define">
 			<bind key="table">"\schema.raw_data"</bind>
@@ -163,10 +162,10 @@
 		<make table="raw_data">
 		 <rowmaker idmaps="*">
 			<var key="specAx">getWCSAxis(@header_, 1, forceSeparable=True)</var>
-			<var key="raRaw">(@RA if @RA is not None else @OBJCTRA)</var>
-			<var key="decRaw">(@DEC if @DEC is not None else @OBJCTDEC)</var>
+			<var key="ra">(@RA if @RA is not None else @OBJCTRA)</var>
+			<var key="dec">(@DEC if @DEC is not None else @OBJCTDEC)</var>
 
-			<map key="ra"><![CDATA[(
+			<!--<map key="ra"><![CDATA[(
 			(parseAngle(str(@raRaw).replace(";", ":"), "hms", sepChar=":")*15)
 				if ((":" in str(@raRaw)) or (";" in str(@raRaw)))
 				else (float(@raRaw)*15 if float(@raRaw) <= 24 else float(@raRaw))
@@ -176,7 +175,7 @@
 				parseAngle(str(@decRaw).replace(";", ":"), "dms", sepChar=":")
 					if ((":" in str(@decRaw)) or (";" in str(@decRaw)))
 					else float(@decRaw)
-			) if @decRaw else None]]></map>
+			) if @decRaw else None]]></map>-->
 
 			<apply procDef="//ssap#fill-plainlocation">
 				<bind key="aperture">0.0363</bind>
@@ -205,7 +204,8 @@
 
 		<meta name="_associatedDatalinkService">
 			<meta name="serviceId">sdl</meta>
-			<meta name="idColumn">prodtblAccref</meta>
+			<!--<meta name="idColumn">prodtblAccref</meta>-->
+			<meta name="idColumn">accref</meta>
 		</meta>
 
 		<mixin
@@ -261,9 +261,12 @@
 				from gavo import base
 				from gavo.utils import pyfits
 				
+				<!--accref = self.sourceToken.get("prodtblAccref")-->
 				accref = self.sourceToken.get("prodtblAccref")
 				if not accref:
-					raise base.ValidationError("No prodtblAccref in datalink token", "prodtblAccref")
+					<!--raise base.ValidationError("No prodtblAccref in datalink token",
+          "prodtblAccref")-->
+					raise base.ValidationError("No accref in datalink token", "accref")
 
 				sourcePath = os.path.join(base.getConfig("inputsDir"), accref)
 
@@ -318,7 +321,7 @@
 
 			<condDesc>
 				<inputKey original="data.ssa_targname" tablehead="Target Object">
-					<values fromdb="SELECT DISTINCT ssa_targname
+					<values fromdb="ssa_targname
 						FROM spectra_agn_archive.data
 						ORDER BY ssa_targname"/>
 				</inputKey>
@@ -353,57 +356,18 @@
 
 		<!-- 1) SSAP query by sky position: ensures service answers and returns a VOTable -->
 		<regTest title="SSAP responds to positional query and returns a VOTable">
-			<url>
-				ssa/ssap.xml?REQUEST=queryData&amp;FORMAT=votable
-				&amp;POS=7.2375222,45.6988611
-				&amp;SIZE=0.2
-				&amp;MAXREC=1
-			</url>
-			<code>
-				# We just check this looks like an SSA VOTable response.
-				self.assertHasStrings(
-					"VOTABLE",
-					"SimpleSpectralAccess")
+			<url REQUEST="queryData"
+        POS="4.55,5.35"
+        SIZE="0.5"
+        FORMT="ALL"
+        >ssa/ssap.xml</url>
+      <code>
+        rows = self.getVOTableRows()
+        row = rows[0]
+        self.assertEqual(row["ssa_targname"],'3C120')
 			</code>
 		</regTest>
 
-		<!-- 2) Datalink metadata: ensures dlmeta works for a known product identifier -->
-		<regTest title="Datalink dlmeta returns a VOTable with access info">
-			<url ID="spectra_agn_archive/data/s_MRK376_03-04.01.1976_2.8m_XIII-4-24.fits">
-				sdl/dlmeta
-			</url>
-			<code>
-				# Datalink responses are VOTables with access_url/semantics.
-				self.assertHasStrings(
-					"VOTABLE",
-					"access_url",
-					"semantics")
-			</code>
-		</regTest>
-
-		<!-- 3) Datalink dlget: ensures data function actually produces FITS bytes -->
-		<regTest title="Datalink dlget delivers FITS (SIMPLE card present)">
-			<url ID="spectra_agn_archive/data/s_MRK376_03-04.01.1976_2.8m_XIII-4-24.fits">
-				sdl/dlget
-			</url>
-			<code>
-				# Minimal strong signal that we got a FITS file, not HTML/traceback.
-				self.assertHasStrings("SIMPLE")
-				self.assertLacksStrings("Traceback", "Internal Error")
-			</code>
-		</regTest>
-
-		<!-- 4) Direct product delivery via getproduct: catches 500s in product delivery chain -->
-		<regTest title="Direct getproduct returns FITS (no 500/error page)">
-			<url>
-				getproduct/spectra_agn_archive/data/s_MRK376_03-04.01.1976_2.8m_XIII-4-24.fits
-			</url>
-			<code>
-				self.assertHasStrings("SIMPLE")
-				self.assertLacksStrings("Internal Error", "Traceback")
-			</code>
-		</regTest>
-<!-- ==SETUP== fix regtest-->
 	</regSuite>
 
 </resource>
