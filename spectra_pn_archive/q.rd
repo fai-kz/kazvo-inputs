@@ -320,10 +320,14 @@
       <url ID="ivo://fai.kz/~?spectra_pn_archive/data/s_M1-77_29-30.09.1981_5m_2548.fits">sdl/dlmeta</url>
       <code>
         links = self.datalinkBySemantics()
-        self.assertEqual(set(links), {'#preview', '#this', '#proc'})
+        self.assertEqual(
+          set(links), {'#preview', '#this', '#proc', '#derivation'})
         self.assertTrue("cutouts and simple calibration" 
           in links["#proc"][0]["description"],
           "#proc description broken")
+        self.assertTrue("Spectral Data Model"
+          in links["#derivation"][0]["description"],
+          "#derivation description broken")
       </code>
     </regTest>
 
