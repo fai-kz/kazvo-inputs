@@ -14,7 +14,7 @@
         The catalog aims to facilitate studies of stellar variability, galactic structure, and
         stellar evolution.
     </meta>
-    <meta name="subject">variable stars</meta>
+    <meta name="subject">variable-stars</meta>
     <meta name="type">service</meta>
     <meta name="source">Kazakhstan Virtual Observatory (KazVO)</meta>
 
@@ -45,20 +45,24 @@
             unit="d" ucd="time.period"
             verbLevel="5"
             description="Variability period (days) from GCVS"/>
-        <column name="var_star_num_gcvs" type="integer" required="True"
+        <column name="var_star_num_gcvs" type="integer"
             ucd="meta.id"
             verbLevel="10"
-            description="Variable star number assigned in GCVS"/>
+            description="Variable star number assigned in GCVS">
+            <values nullLiteral="-1"/>
+        </column>
         <column name="var_star_cpt_gcvs" type="text"
             ucd="meta.id"
             verbLevel="10"
             description="Component of a variable star system in GCVS"/>
 
         <!-- Gaia DR3 Data -->
-        <column name="source_id_gaia" type="bigint" required="True"
+        <column name="source_id_gaia" type="bigint"
             ucd="meta.id;meta.main"
             verbLevel="1"
-            description="Unique Gaia DR3 source identifier"/>
+            description="Unique Gaia DR3 source identifier">
+            <values nullLiteral="-1"/>
+        </column>
         <column name="parallax_gaia" type="double precision"
             unit="mas" ucd="pos.parallax"
             verbLevel="1"
@@ -88,7 +92,7 @@
             verbLevel="5"
             description="Effective temperature (Kelvin) from TESS"/>
         <column name="logg_tess" type="double precision"
-            unit="cm/s2" ucd="phys.gravity"
+            ucd="phys.gravity"
             verbLevel="5"
             description="Surface gravity (log g) from TESS"/>
         <column name="mass_tess" type="double precision"
@@ -102,7 +106,7 @@
 
         <!-- Computed and Predicted Data -->
         <column name="r_gal_calc" type="double precision"
-            unit="kpc" ucd="pos.distance.galactic"
+            unit="kpc" ucd="pos.distance"
             verbLevel="10"
             description="Galactocentric distance of the star (calculated)"/>
         <column name="spt_source" type="text"
@@ -118,7 +122,7 @@
             verbLevel="10"
             description="Source of variability type (GCVS, Gaia, or machine learning prediction)"/>
         <column name="final_var_type" type="text"
-            ucd="src.varType"
+            ucd="meta.code;src.var"
             verbLevel="5"
             description="Final assigned variability type (observed or predicted)"/>
     </table>
@@ -141,10 +145,11 @@
     </coverage>
 
     <service id="scs" allowed="form,scs.xml">
-        <meta name="shortName">KazVO Variable Stars</meta>
+        <meta name="shortName">KazVO Var Stars</meta>
         <meta>
-            testQuery.ra: 120.5
-            testQuery.dec: -45.3
+            testQuery.ra: 346.3451843261719
+            testQuery.dec: 47.67631149291992
+            testQuery.sr: 0.001
         </meta>
         <scsCore queriedTable="main">
             <FEED source="//scs#coreDescs"/>
@@ -154,6 +159,29 @@
         <publish sets="ivo_managed" render="scs.xml"/>
     </service>
 
-<!-- ==SETUP== fix regtest-->
+    <regSuite title="var_star_cat service regression">
+        <regTest title="SCS returns the catalogued variable star">
+            <url RA="346.3451843261719" DEC="47.67631149291992"
+                SR="0.001" MAXREC="5"
+                RESPONSEFORMAT="application/x-votable+xml;serialization=tabledata">
+                http://127.0.0.1/var_star_cat/q/scs/scs.xml
+            </url>
+            <code><![CDATA[
+    self.assertHasStrings(
+        "VOTABLE", 'name="QUERY_STATUS" value="OK"',
+        'name="name_gcvs"', "AA And")
+    self.assertLacksStrings(
+        "Internal error", "Traceback", 'value="ERROR"')
+    ]]></code>
+        </regTest>
 
+        <regTest title="Variable-star web form renders">
+            <url>http://127.0.0.1/var_star_cat/q/scs/form</url>
+            <code><![CDATA[
+    self.assertHasStrings(
+        "ML-Enhanced GCVS", "<form", "Search radius")
+    self.assertLacksStrings("Internal error", "Traceback")
+    ]]></code>
+        </regTest>
+    </regSuite>
 </resource>

@@ -32,7 +32,8 @@
 		<mixin>//ssap#simpleCoverage</mixin>
 		<FEED source="//scs#splitPosIndex"
 			long="degrees(long(ssa_location))"
-			lat="degrees(lat(ssa_location))"/>
+			lat="degrees(lat(ssa_location))"
+			columns="ssa_location"/>
 		<column name="ssa_dateObs" type="double precision"
 			unit="d"
 			ucd="time.epoch"
@@ -144,10 +145,11 @@
 	<data id="import">
 		<recreateAfter>make_view</recreateAfter>
 		<property key="previewDir">previews</property>
-    <sources>
-      <pattern>/var/gavo/inputs/observations/kamenskoye/azt-8/spectra_slit/targets/[0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/reduced/*.[Ff][Ii][Tt]</pattern>
-      <pattern>/var/gavo/inputs/observations/kamenskoye/azt-8/spectra_slit/targets/[0-9][0-9][0-9][0-9]/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/reduced/*.[Ff][Ii][Tt][Ss]</pattern>
-    </sources>
+		<!--<sources recurse="True"
+		 pattern="/var/gavo/inputs/astroplates/spectra_agn_archive/reducted_spectra_agn/*.fits"/>-->
+		<sources recurse="True"
+			pattern="/var/gavo/inputs/spectra_agn_archive/data/*.fits"/>
+
 		<fitsProdGrammar qnd="True">
 		 <rowfilter procDef="//products#define">
 			<bind key="table">"\schema.raw_data"</bind>
@@ -162,10 +164,10 @@
 		<make table="raw_data">
 		 <rowmaker idmaps="*">
 			<var key="specAx">getWCSAxis(@header_, 1, forceSeparable=True)</var>
-			<var key="ra">(@RA if @RA is not None else @OBJCTRA)</var>
-			<var key="dec">(@DEC if @DEC is not None else @OBJCTDEC)</var>
+			<var key="raRaw">(@RA if @RA is not None else @OBJCTRA)</var>
+			<var key="decRaw">(@DEC if @DEC is not None else @OBJCTDEC)</var>
 
-			<!--<map key="ra"><![CDATA[(
+			<map key="ra"><![CDATA[(
 			(parseAngle(str(@raRaw).replace(";", ":"), "hms", sepChar=":")*15)
 				if ((":" in str(@raRaw)) or (";" in str(@raRaw)))
 				else (float(@raRaw)*15 if float(@raRaw) <= 24 else float(@raRaw))
@@ -175,7 +177,7 @@
 				parseAngle(str(@decRaw).replace(";", ":"), "dms", sepChar=":")
 					if ((":" in str(@decRaw)) or (";" in str(@decRaw)))
 					else float(@decRaw)
-			) if @decRaw else None]]></map>-->
+			) if @decRaw else None]]></map>
 
 			<apply procDef="//ssap#fill-plainlocation">
 				<bind key="aperture">0.0363</bind>
@@ -204,8 +206,7 @@
 
 		<meta name="_associatedDatalinkService">
 			<meta name="serviceId">sdl</meta>
-			<!--<meta name="idColumn">prodtblAccref</meta>-->
-			<meta name="idColumn">accref</meta>
+			<meta name="idColumn">ssa_pubDID</meta>
 		</meta>
 
 		<mixin
@@ -258,15 +259,15 @@
 			<iterator>
 				<code>
 				import os
+				import urllib.parse
 				from gavo import base
 				from gavo.utils import pyfits
-				
-				<!--accref = self.sourceToken.get("prodtblAccref")-->
-				accref = self.sourceToken.get("prodtblAccref")
-				if not accref:
-					<!--raise base.ValidationError("No prodtblAccref in datalink token",
-          "prodtblAccref")-->
-					raise base.ValidationError("No accref in datalink token", "accref")
+
+				pubDID = self.sourceToken.get("ssa_pubDID")
+				if not pubDID:
+					raise base.ValidationError(
+						"No ssa_pubDID in datalink token", "ssa_pubDID")
+				accref = urllib.parse.unquote(pubDID.split("?", 1)[-1])
 
 				sourcePath = os.path.join(base.getConfig("inputsDir"), accref)
 
@@ -321,8 +322,7 @@
 
 			<condDesc>
 				<inputKey original="data.ssa_targname" tablehead="Target Object">
-					<values fromdb="ssa_targname
-						FROM spectra_agn_archive.data
+					<values fromdb="ssa_targname FROM spectra_agn_archive.data
 						ORDER BY ssa_targname"/>
 				</inputKey>
 			</condDesc>
@@ -354,18 +354,30 @@
 
 	<regSuite title="spectra_agn_archive service regression">
 
-		<!-- 1) SSAP query by sky position: ensures service answers and returns a VOTable -->
-		<regTest title="SSAP responds to positional query and returns a VOTable">
-			<url REQUEST="queryData"
-        POS="4.55,5.35"
-        SIZE="0.5"
-        FORMT="ALL"
-        >ssa/ssap.xml</url>
-      <code>
-        rows = self.getVOTableRows()
-        row = rows[0]
-        self.assertEqual(row["ssa_targname"],'3C120')
-			</code>
+		<regTest title="SSAP returns a valid result table">
+			<url REQUEST="queryData" MAXREC="1">
+				http://127.0.0.1/spectra_agn_archive/q/ssa/ssap.xml
+			</url>
+			<code><![CDATA[
+	self.assertHasStrings(
+		"VOTABLE", 'name="QUERY_STATUS"',
+		'name="ssa_pubDID"', 'name="ssa_targname"', "<TR>")
+	self.assertLacksStrings(
+		'value="ERROR"', "Traceback", "Internal Server Error")
+	]]></code>
+		</regTest>
+
+		<regTest title="Datalink delivers a spectrum">
+			<url
+				ID="ivo://fai.kz/~?spectra_agn_archive/data/s_3C120_03-04.02.1986_20m_XXV-2-1.fits"
+				FORMAT="application/x-votable+xml;serialization=tabledata">
+				http://127.0.0.1/spectra_agn_archive/q/sdl/dlget
+			</url>
+			<code><![CDATA[
+	self.assertHasStrings(
+		"VOTABLE", 'name="spectral"', 'name="flux"', "<TR>", "<TD>")
+	self.assertLacksStrings("Traceback", "UsageError", "Internal Server Error")
+	]]></code>
 		</regTest>
 
 	</regSuite>
