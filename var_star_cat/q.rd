@@ -164,7 +164,7 @@
             <url RA="346.3451843261719" DEC="47.67631149291992"
                 SR="0.001" MAXREC="5"
                 RESPONSEFORMAT="application/x-votable+xml;serialization=tabledata">
-                http://127.0.0.1/var_star_cat/q/scs/scs.xml
+                scs/scs.xml
             </url>
             <code><![CDATA[
     self.assertHasStrings(
@@ -176,7 +176,7 @@
         </regTest>
 
         <regTest title="Variable-star web form renders">
-            <url>http://127.0.0.1/var_star_cat/q/scs/form</url>
+            <url>scs/form</url>
             <code><![CDATA[
     self.assertHasStrings(
         "ML-Enhanced GCVS", "<form", "Search radius")
