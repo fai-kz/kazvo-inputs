@@ -356,7 +356,7 @@
 
 		<regTest title="SSAP returns a valid result table">
 			<url REQUEST="queryData" MAXREC="1">
-				http://127.0.0.1/spectra_agn_archive/q/ssa/ssap.xml
+				ssa/ssap.xml
 			</url>
 			<code><![CDATA[
 	self.assertHasStrings(
@@ -369,9 +369,9 @@
 
 		<regTest title="Datalink delivers a spectrum">
 			<url
-				ID="ivo://fai.kz/~?spectra_agn_archive/data/s_3C120_03-04.02.1986_20m_XXV-2-1.fits"
+				ID="ivo://fai.kz/~?observations/kamenskoye/azt-8/spectra_slit/targets/1986/1986-02-03/reduced/s_3C120_03-04.02.1986_20m_XXV-2-1.fits"
 				FORMAT="application/x-votable+xml;serialization=tabledata">
-				http://127.0.0.1/spectra_agn_archive/q/sdl/dlget
+				sdl/dlget
 			</url>
 			<code><![CDATA[
 	self.assertHasStrings(
