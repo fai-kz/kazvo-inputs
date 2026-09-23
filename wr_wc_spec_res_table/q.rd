@@ -168,7 +168,7 @@
 		<column name="HeII_CIV_4340_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII CIV 4340)"
 			description="Absolute flux of HeII and CIV λ4340 blend."
 			verbLevel="1"/>
@@ -184,7 +184,7 @@
 		<column name="CIII_CIV_4444_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII CIV 4444)"
 			description="Absolute flux of CIII and CIV λ4444 blend."
 			verbLevel="1"/>
@@ -200,7 +200,7 @@
 	<column name="CIII_HeII_4515_4540_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII HeII 4515 4540)"
 			description="Absolute flux of CIII and HeII λ4515 and 4540 blend."
 			verbLevel="1"/>
@@ -216,7 +216,7 @@
 	<column name="HeII_4540_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII 4540)"
 			description="Absolute flux of HeII III λ4540 emission line."
 			verbLevel="1"/>
@@ -232,7 +232,7 @@
 	<column name="CIII_4619_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII 4619)"
 			description="Absolute flux of CIII λ4619 emission line."
 			verbLevel="1"/>
@@ -248,7 +248,7 @@
 	<column name="CIV_HeII_4650_4686_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeII 4650 4686)"
 			description="Absolute flux of CIV and HeII λ4650 and 4686 blend."
 			verbLevel="1"/>
@@ -264,7 +264,7 @@
 	<column name="CIV_HeII_4650_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeII 4650)"
 			description="Absolute flux of CIV and HeII λ4650 blend."
 			verbLevel="1"/>
@@ -280,7 +280,7 @@
 	<column name="CIV_4656_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 4656)"
 			description="Absolute flux of CIV λ4656 emission line."
 			verbLevel="1"/>
@@ -296,7 +296,7 @@
 	<column name="CIII_CIV_4656_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII CIV 4656)"
 			description="Absolute flux of CII and CIV λ4656 blend."
 			verbLevel="1"/>
@@ -312,7 +312,7 @@
 	<column name="CIV_HeII_4660_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeII 4660)"
 			description="Absolute flux of CIV and HeII λ4660 blend."
 			verbLevel="1"/>
@@ -328,7 +328,7 @@
 	<column name="CIV_4660_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 4660)"
 			description="Absolute flux of CIV λ4660 emission line."
 			verbLevel="1"/>
@@ -344,7 +344,7 @@
 	<column name="CIV_HeII_4686_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeII 4686)"
 			description="Absolute flux of CIV λ4686 blend."
 			verbLevel="1"/>
@@ -360,7 +360,7 @@
 	<column name="HeII_4686_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII 4686)"
 			description="Absolute flux of HeII λ4686 emission line."
 			verbLevel="1"/>
@@ -376,7 +376,7 @@
 	<column name="OIV_CIV_4780_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(OIV CIV 4780)"
 			description="Absolute flux of OIV and CIV λ4945 blend."
 			verbLevel="1"/>
@@ -392,7 +392,7 @@
 	<column name="CII_4780_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII 4780)"
 			description="Absolute flux of СII λ4780 emission line."
 			verbLevel="1"/>
@@ -408,7 +408,7 @@
 	<column name="HeII_4860_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII_4860)"
 			description="Absolute flux of HeII λ4860 emission line."
 			verbLevel="1"/>
@@ -424,7 +424,7 @@
 	<column name="CIV_HeII_4860_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeII 4860)"
 			description="Absolute flux of CIV and HeII λ4860 blend."
 			verbLevel="1"/>
@@ -440,7 +440,7 @@
 	<column name="CIV_HeII_4861_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeII 4861)"
 			description="Absolute flux of CIV and HeII λ4861 blend."
 			verbLevel="1"/>
@@ -456,7 +456,7 @@
 	<column name="HeI_4921_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeI 4921)"
 			description="Absolute flux of HeI λ4921 emission line."
 			verbLevel="1"/>
@@ -472,7 +472,7 @@
 	<column name="HeII_4921_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII 4921)"
 			description="Absolute flux of HeII λ4921 emission line."
 			verbLevel="1"/>
@@ -488,7 +488,7 @@
 	<column name="OV_4930_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(OV 4930)"
 			description="Absolute flux of OV λ4930 emission line."
 			verbLevel="1"/>
@@ -504,7 +504,7 @@
 	<column name="OV_4940_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(OV 4940)"
 			description="Absolute flux of OV λ4940 emission line."
 			verbLevel="1"/>
@@ -520,7 +520,7 @@
 	<column name="HeII_4940_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII 4940)"
 			description="Absolute flux of HeII λ4940 emission line."
 			verbLevel="1"/>
@@ -536,7 +536,7 @@
 	<column name="CIV_5016_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 5016)"
 			description="Absolute flux of CIV λ5016 emission line."
 			verbLevel="1"/>
@@ -552,7 +552,7 @@
 	<column name="CIV_HeI_5016_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeI 5016)"
 			description="Absolute flux of CIV and HeI λ5016 blend."
 			verbLevel="1"/>
@@ -568,7 +568,7 @@
 	<column name="CIV_5017_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 5017)"
 			description="Absolute flux of CIV λ5017 emission line."
 			verbLevel="1"/>
@@ -584,7 +584,7 @@
 	<column name="CIV_HeI_5017_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV HeI 5017)"
 			description="Absolute flux of CIV and HeI λ5017 blend."
 			verbLevel="1"/>
@@ -600,7 +600,7 @@
 	<column name="CII_CIII_5141_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII CIII 5141)"
 			description="Absolute flux of CII and CIII λ5141 blend."
 			verbLevel="1"/>
@@ -616,7 +616,7 @@
 	<column name="CIII_5250_5270_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII_5250_5270)"
 			description="Absolute flux of CIII λ5250 and 5270 emission line."
 			verbLevel="1"/>
@@ -632,7 +632,7 @@
 	<column name="CIII_5250_5305_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII 5250+5305)"
 			description="Absolute flux of CIII λ5250+5305 emission blend."
 			verbLevel="1"/>
@@ -648,7 +648,7 @@
 	<column name="CIII_OIV_5260_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII+OIV 5260)"
 			description="Absolute flux of CIII + OIV λ5260 emission line."
 			verbLevel="1"/>
@@ -664,7 +664,7 @@
 	<column name="OVI_5280_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(OVI 5280)"
 			description="Absolute flux of OVI λ5280 emission line."
 			verbLevel="1"/>
@@ -680,7 +680,7 @@
 	<column name="CIII_5305_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII 5305)"
 			description="Absolute flux of CIII λ5305 emission line."
 			verbLevel="1"/>
@@ -696,7 +696,7 @@
 	<column name="HeII_5411_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII 5411)"
 			description="Absolute flux of HeII λ5411 emission line."
 			verbLevel="1"/>
@@ -712,7 +712,7 @@
 	<column name="HeII_CIV_5411_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII+CIV 5411)"
 			description="Absolute flux of HeII + CIV λ5411 emission blend."
 			verbLevel="1"/>
@@ -728,7 +728,7 @@
 	<column name="HeII_CIII_5411_5470_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII+CIII 5411–5470)"
 			description="Absolute flux of HeII + CIII λ5411–5470 emission feature."
 			verbLevel="1"/>
@@ -744,7 +744,7 @@
 	<column name="CVI_5440_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CVI 5440)"
 			description="Absolute flux of CVI λ5440 emission line."
 			verbLevel="1"/>
@@ -760,7 +760,7 @@
 	<column name="CIV_5460_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 5460)"
 			description="Absolute flux of CIV λ5460 emission line."
 			verbLevel="1"/>
@@ -776,7 +776,7 @@
 	<column name="CIV_5469_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 5469)"
 			description="Absolute flux of CIV λ5469 emission line."
 			verbLevel="1"/>
@@ -792,7 +792,7 @@
 	<column name="CIV_5471_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 5471)"
 			description="Absolute flux of CIV λ5471 emission line."
 			verbLevel="1"/>
@@ -808,7 +808,7 @@
 	<column name="HeII_CIV_5595_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII+CIV 5595)"
 			description="Absolute flux of HeII + CIV λ5595 emission blend."
 			verbLevel="1"/>
@@ -824,7 +824,7 @@
 	<column name="HeII_CIV_6560_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII+CIV 6560)"
 			description="Absolute flux of HeII + CIV λ6560 emission blend."
 			verbLevel="1"/>
@@ -840,7 +840,7 @@
 	<column name="HeII_6560_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeII 6560)"
 			description="Absolute flux of HeII λ6560 emission line."
 			verbLevel="1"/>
@@ -856,7 +856,7 @@
 	<column name="CII_HeII_6580_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII+HeII 6580)"
 			description="Absolute flux of blended CII + HeII λ6580 emission line."
 			verbLevel="1"/>
@@ -872,7 +872,7 @@
 	<column name="HeI_6678_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeI 6678)"
 			description="Absolute flux of HeI λ6678 emission line."
 			verbLevel="1"/>
@@ -888,7 +888,7 @@
 	<column name="CII_CIII_6732_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII+CIII 6732)"
 			description="Absolute flux of CII + CIII λ6732 emission line."
 			verbLevel="1"/>
@@ -904,7 +904,7 @@
 	<column name="CIII_6740_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII 6740)"
 			description="Absolute flux of CIII λ6740 emission line."
 			verbLevel="1"/>
@@ -920,7 +920,7 @@
 	<column name="CIII_CII_6744_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII+CII 6744)"
 			description="Absolute flux of CIII + CII λ6744 emission blend."
 			verbLevel="1"/>
@@ -936,7 +936,7 @@
 	<column name="CIII_CIV_6748_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII+CIV 6748)"
 			description="Absolute flux of CIII + CIV λ6748 emission line."
 			verbLevel="1"/>
@@ -952,7 +952,7 @@
 	<column name="CI_CIII_6748_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CI+CIII 6748)"
 			description="Absolute flux of CI + CIII λ6748 emission line."
 			verbLevel="1"/>
@@ -968,7 +968,7 @@
 	<column name="CII_CIII_6780_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII+CIII 6780)"
 			description="Absolute flux of CII + CIII λ6780 emission line."
 			verbLevel="1"/>
@@ -984,7 +984,7 @@
 	<column name="CIII_7037_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIII 7037)"
 			description="Absolute flux of CIII λ7037 emission line."
 			verbLevel="1"/>
@@ -1000,7 +1000,7 @@
 	<column name="CIV_7060_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV 7060)"
 			description="Absolute flux of CIV λ7060 emission line."
 			verbLevel="1"/>
@@ -1016,7 +1016,7 @@
 	<column name="CIV_HeI_7060_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV+HeI 7060)"
 			description="Absolute flux of blended CIV + HeI λ7060 emission line."
 			verbLevel="1"/>
@@ -1032,7 +1032,7 @@
 	<column name="CIV_HeI_7065_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV+HeI 7065)"
 			description="Absolute flux of blended CIV + HeI λ7065 emission line."
 			verbLevel="1"/>
@@ -1048,7 +1048,7 @@
 	<column name="CII_HeI_7065_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII+HeI 7065)"
 			description="Absolute flux of blended CII + HeI λ7065 emission line."
 			verbLevel="1"/>
@@ -1064,7 +1064,7 @@
 	<column name="CIV_CII_7065_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CIV+CII 7065)"
 			description="Absolute flux of blended CIV + CII λ7065 emission line."
 			verbLevel="1"/>
@@ -1080,7 +1080,7 @@
 	<column name="HeI_7065_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(HeI 7065)"
 			description="Absolute flux of HeI λ7065 emission line."
 			verbLevel="1"/>
@@ -1096,7 +1096,7 @@
 	<column name="CII_7122_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII 7122)"
 			description="Absolute flux of CII λ7122 emission line."
 			verbLevel="1"/>
@@ -1112,7 +1112,7 @@
 	<column name="CII_7207_7258_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII 7207–7258)"
 			description="Absolute flux of CII λ7207–7258 emission feature."
 			verbLevel="1"/>
@@ -1128,7 +1128,7 @@
 	<column name="CII_7234_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII 7234)"
 			description="Absolute flux of CII λ7234 emission line."
 			verbLevel="1"/>
@@ -1144,7 +1144,7 @@
 	<column name="Unknown_7254_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(7254)"
 			description="Absolute flux of λ7254 emission line."
 			verbLevel="1"/>
@@ -1160,7 +1160,7 @@
 	<column name="CII_7260_Fabs"
 			type="real"
 			ucd="phot.flux;em.line"
-			unit="W.m-2"
+			unit="W.m**-2"
 			tablehead="F(CII 7260)"
 			description="Absolute flux of CII λ7260 emission line."
 			verbLevel="1"/>
