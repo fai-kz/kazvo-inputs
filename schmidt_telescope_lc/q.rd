@@ -11,7 +11,7 @@ They represent the results of photometric observations of stars, comets, nebulae
   <!-- Take keywords from 
     http://www.ivoa.net/rdf/uat
     if at all possible -->
-  <meta name="subject">history-of-astronomy></meta>
+  <meta name="subject">history-of-astronomy</meta>
   <meta name="subject">gaseous-nebulae</meta>
   <meta name="subject">comets</meta>
   <meta name="subject">field-of-view</meta>
@@ -178,7 +178,7 @@ They represent the results of photometric observations of stars, comets, nebulae
   </dbCore>
 
   <service id="web" allowed="form" core="imagecore">
-    <meta name="shortName">schmidt_telescope_lc web</meta>
+    <meta name="shortName">SchmidtLC Web</meta>
     <meta name="title">Web interface to FAI Schmidt telescope (large camera) archive</meta>
     <meta name="_related" title="Calibration data for these frames">
       \internallink{\rdId/cal/form}
@@ -195,7 +195,7 @@ They represent the results of photometric observations of stars, comets, nebulae
   </service>
 
   <service id="i" allowed="form,siap.xml" core="imagecore">
-    <meta name="shortName">schmidt_telescope_lc siap</meta>
+    <meta name="shortName">SchmidtLC SIAP</meta>
 
     <meta name="sia.type">Pointed</meta>
     
@@ -220,11 +220,16 @@ They represent the results of photometric observations of stars, comets, nebulae
         >i/siap.xml</url>
       <code>
         rows = self.getVOTableRows()
-        self.assertEqual(len(rows), 1)
-        row = rows[0]
-        self.assertEqual(row["object"], "M44")
-        self.assertEqual(row["filename"], 
-                'M44_24-25.02.1987_8m_14S-3-1')
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(
+          {row["filename"] for row in rows},
+          {
+            "M44_23-24.02.1987_11m_13S-2-6",
+            "M44_24-25.02.1987_8m_14S-3-1",
+            "M44_24-25.02.1987_9m_14S-2-1",
+          })
+        for row in rows:
+          self.assertEqual(row["object"], "M44")
       </code>
     </regTest>
   </regSuite>
