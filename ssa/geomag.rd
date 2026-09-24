@@ -158,11 +158,13 @@
 		</regTest>
 
 		<regTest title="geomag web interface is there">
-			<url parSet="form" obs_mjd="2023.231 ..	2023.2311">q/form</url>
+			<url parSet="form"
+				obs_time__day="26" obs_time__month="3" obs_time__year="2023"
+				_DBOPTIONS_ORDER="obs_time">q/form</url>
 			<code><![CDATA[
 				self.assertHasStrings(
-					"2023-03-26T14:57:00Z", # mjd serialisation, first row
-					"55618.7", # B total, last row
+					"2023-03-26T00:00:00", # requested timestamp
+					"55614.7", # B total at that timestamp
 					'title="Magnetic field component in the Y direction."')
 			]]></code>
 		</regTest>
