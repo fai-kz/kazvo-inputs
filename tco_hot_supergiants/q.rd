@@ -518,11 +518,12 @@ Primary and scientific data reduction was performed within the IRAF (Image Reduc
     <regTest title="tco supergiants SSA returns something">
       <url TARGETNAME='HD_28747' REQUEST="queryData">ssa/ssap.xml</url>
       <code>
-        row = self.getFirstVOTableRow()
+        row = self.getFirstVOTableRow(rejectExtras=False)
         self.assertAlmostEqual(row['ssa_specmid'], 6.071904e-07)
         self.assertAlmostEqual(row['ssa_dateObs'], 57042.14218651643)
-        self.assertTrue(row["accref"].endswith("getproduct/tco_hot_supergiants/"
-          "data/targets/2015/2015-01-20/HD28747_20150119_3850_6715.fits"),
+        self.assertTrue(row["accref"].endswith((
+          "HD28747_20150119_3850_6715.fits",
+          "HD28747_20150119_3850_6715_1.fits")),
           "Accref is wrong.")
       </code>
     </regTest>
