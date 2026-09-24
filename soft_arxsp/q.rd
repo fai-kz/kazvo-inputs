@@ -57,7 +57,6 @@
 
 			<meta name="accessURL">https://vo.fai.kz/software.php</meta>
 			<meta name="referenceURL">https://vo.fai.kz/software.php</meta>
-			<meta name="interfaceType">vs:WebBrowser</meta>
 			<meta name="description">
 				ArXSP is a Python-based desktop application for the reduction and analysis
 				of digitized archival spectra obtained at the Fesenkov Astrophysical Institute.
