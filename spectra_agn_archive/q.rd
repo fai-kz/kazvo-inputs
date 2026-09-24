@@ -369,7 +369,7 @@
 
 		<regTest title="Datalink delivers a spectrum">
 			<url
-				ID="ivo://fai.kz/~?observations/kamenskoye/azt-8/spectra_slit/targets/1986/1986-02-03/reduced/s_3C120_03-04.02.1986_20m_XXV-2-1.fits"
+				ID="ivo://fai.kz/~?spectra_agn_archive/data/s_3C120_03-04.02.1986_20m_XXV-2-1.fits"
 				FORMAT="application/x-votable+xml;serialization=tabledata">
 				sdl/dlget
 			</url>
