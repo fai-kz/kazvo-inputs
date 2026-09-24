@@ -41,8 +41,6 @@
 			<meta name="accessURL">https://vo.fai.kz/comput_sub.php</meta>
 			<meta name="source">https://vo.fai.kz/comput_sub.php</meta>
 
-			<meta name="interfaceType">vs:WebBrowser</meta>
-
 			<meta name="description">
 				Via this service, it is possible to order computations with FAI computer cluster.
 
@@ -66,4 +64,3 @@
 
 
 </resource>
-
