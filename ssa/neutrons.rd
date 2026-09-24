@@ -122,9 +122,8 @@
 				>/tap/sync</url>
 			<code>
 				row = self.getFirstVOTableRow()
-				print(row)
 				self.assertAlmostEqual(row["counts"], 1315.5)
-				self.assertEqual(row["obs_time"],datetime.datetime(2023, 6, 16, 16, 36))
+				self.assertEqual(row["obs_time"].isoformat(), "2023-06-16T16:36:00")
 			</code>
 		</regTest>
 

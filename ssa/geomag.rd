@@ -141,7 +141,7 @@
 				<code>
 					row = self.getFirstVOTableRow()
 					self.assertAlmostEqual(row["b_total"], 55630.6)
-					self.assertEqual(row["obs_time"], datetime.datetime(2023, 6, 16, 16, 35))
+					self.assertEqual(row["obs_time"].isoformat(), "2023-06-16T16:35:00")
 			</code>
 		</regTest>
 
