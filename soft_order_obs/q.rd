@@ -46,7 +46,6 @@
 			<meta name="accessURL">https://vo.fai.kz/observatory_descrip.php</meta>
 			<meta name="source">https://vo.fai.kz/observatory_descrip.php</meta>
 			
-			<meta name="interfaceType">vs:WebBrowser</meta>
 						<meta name="description">
 				Web page for requesting observations with FAI telescopes (external tool).
 			</meta>
