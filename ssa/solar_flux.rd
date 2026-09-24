@@ -114,12 +114,12 @@
     <regTest title="solar flux test">
       <url parSet="TAP"
         QUERY="SELECT * FROM solar_flux.main
-               WHERE obs_time BETWEEN '2023-06-16T16:34:59' AND '2023-06-16T16:35:01'"
+               WHERE obs_time BETWEEN '2023-06-16T02:27:59' AND '2023-06-16T02:28:01'"
         >/tap/sync</url>
       <code>
           row = self.getFirstVOTableRow()
-          self.assertAlmostEqual(row["flux"], 146)
-          self.assertEqual(str(row["obs_time"]), "2023-06-16T16:35:00")
+          self.assertAlmostEqual(row["flux"], 156.4)
+          self.assertEqual(str(row["obs_time"]), "2023-06-16 02:28:00")
       </code>
     </regTest>
 	</regSuite>
