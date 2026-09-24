@@ -1,0 +1,289 @@
+/* -*- css-indent-offset: 8; -*- */
+body {
+	font-family: sans;
+	margin-left: 0;
+	margin-top: 0;
+	margin-right: 0;
+}
+
+body > * {
+	margin-left: 2em;
+	max-width: 60em;
+}
+
+h1#doctitle, h2 {
+	color: navy;
+	background: lightblue;
+	padding-left: 3em;
+	margin-left: -1em;
+	padding-top: 0.5em;
+}
+
+h1 {
+	letter-spacing: -0.015em;
+}
+
+h1#doctitle {
+	padding-top: 1em;
+	background: khaki;
+}
+
+h1#doctitle span {
+	display: block;
+}
+
+h1#doctitle span.doctype {
+	color: gray;
+	font-weight: normal;
+	font-style: italic;
+	font-size: smaller;
+}
+
+dt {
+	color: #666;
+}
+
+#keywords {
+	margin-bottom: 0.3em;
+}
+
+.authors {
+	/* font-style: italic; */
+}
+
+.publisher {
+	font-size: small;
+	color: navy;
+}
+
+span.explanation {
+	display: block;
+}
+
+.serviceURL a {
+	text-decoration: None;
+	font-size: 80%;
+}
+
+/* inline lists (Authors and Abstract) to retain semantics */
+ol.inline, dl.inline {
+	padding-left: 0em;
+}
+
+ol.inline li, dl.inline dt, dl.inline dd {
+	display: inline;
+	padding-left: 0;
+}
+
+ol.inline li:after {
+	content: ", ";
+}
+
+ol.inline li:last-child:after {
+	content: ".";
+}
+
+/* inline return to numbered on :hover */
+ol.inline:hover {
+	list-style-type: decimal-leading-zero;
+}
+
+ol.inline:hover li {
+	display: list-item;
+}
+
+ol.inline:hover li:after
+{
+	content: "";
+}
+
+ol.inline:hover>li:last-child:after
+{
+	content: "";
+}
+
+/* Dates */
+.sidebyside dl {
+	display: block;
+	padding-left: 3em;
+}
+
+.sidebyside dl dt {
+	float: left;
+	min-width: 15em;
+}
+
+.sidebyside dl dd {
+	padding-bottom: 0.2em;
+}
+
+.sidebyside dl dt:first-child + dd {
+	color: navy;
+}
+
+#dates dl:first-of-type dt:first-child,
+#dates dl:first-of-type dt:last-of-type,
+#dates dl:first-of-type dd ~ dd
+{
+	color: gray;
+}
+
+#dates dl:first-of-type dd:last-of-type {
+	color: black;
+}
+#dates dl:first-child dd:last-of-type:after {
+	content: " (current)";
+}
+
+#dates dl:first-of-type dd + dt{
+	color: darkgray;
+}
+
+#contact.sidebyside dl dt {
+	color: #666;
+}
+
+#contact.sidebyside dl dd + dt + dd {
+	color: black;
+}
+
+#dates dl dt span.datestamp {
+	font-family: monospace;
+}
+
+/* Metadata */
+#idbox span.protocol,
+#metadata span.protocol,
+#identifiers span.protocol {
+	color: navy;
+	font-family: monospace;
+	border: thin solid gray;
+	padding: 0.2em;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+	float: right;
+	position: relative;
+	top: 1.5em;
+	min-width: 5em;
+	text-align: center;
+	letter-spacing: 0.05em;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+#metadata dl dd a {
+	text-decoration-color: gray;
+}
+
+#metadata dt,
+#idbox dt,
+#identifiers dt {
+	display: list-item;
+	list-style-position: outside;
+	list-style-type: circle;
+	max-width: 40em; /* aligns the data format 'icons' */
+}
+
+#identifiers dd span {
+	font-family: monospace;
+	text-align: baseline;
+}
+
+#identifiers dt {
+	clear: both;
+	list-style-type: none;
+}
+
+#identifiers dt span.protocol {
+	display: none;
+}
+
+#metadata dd {
+	color: gray;
+}
+
+#metadata dt.browsable,
+#idbox dt.browsable
+{
+	list-style-type: square;
+}
+
+#metadata dt.browsable span,
+#idbox dt.browsable span
+{
+	background: khaki;
+}
+
+#metadata h2 span.joiner {
+	font-weight: normal;
+	padding-left: 0.3em;
+	padding-right: 0.3em;
+}
+
+/* Abstract */
+.abstract {
+	font-size: x-large;
+	line-height: 130%;
+	margin-left: 0;
+	color: gray75;
+	border-top: thin solid lightgray;
+	border-bottom: thin solid lightgray;
+	max-width: 45em;
+	margin-top: 0.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+/* Footer */
+
+address {
+	font-style: normal;
+}
+
+
+
+/* Tables */
+/*
+dl {
+	vertical-align: top;
+}
+dd:nth-of-type(n+2) {
+	margin-top: 10px;
+}
+dt, dd {
+	margin: 5px;
+	padding: 4px;
+}
+dt {
+	min-width: 13em;
+	float: left;
+	clear: left;
+	background: #e7ebf1;
+	border: 1px solid green;
+}
+dd {
+	overflow: hidden;
+
+	border: 1px solid red;
+}
+dd:after {content:' ';
+	  white-space:pre;
+	 }
+div.table {
+	display: table;
+}
+div.table {
+	display: table-cell;
+	width: 100%;
+}
+div.table > * {
+	display: table-cell;
+}
+*/

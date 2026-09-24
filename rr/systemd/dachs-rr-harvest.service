@@ -1,0 +1,19 @@
+[Unit]
+Description=Update the local IVOA RegTAP registry mirror
+Wants=network-online.target
+After=network-online.target postgresql.service dachs.service
+Requires=postgresql.service
+ConditionPathExists=/var/gavo/inputs/rr/q.rd
+
+[Service]
+Type=oneshot
+User=dachsroot
+Group=gavo
+WorkingDirectory=/var/gavo/inputs/rr
+Environment=HOME=/home/dachsroot
+UMask=0002
+ExecStart=/var/gavo/inputs/rr/bin/updateRegistry.sh
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+TimeoutStartSec=12h

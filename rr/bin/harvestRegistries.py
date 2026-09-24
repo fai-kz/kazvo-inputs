@@ -29,7 +29,7 @@ from gavo.utils import stanxml
 RDID = "rr/q"
 RD = api.getRD(RDID)
 
-api.setUserAgent(f"GAVO-RegTAP-harvester (IVOA-copy) DaCHS/{api.__version__}")
+api.setUserAgent(f"KazVO-RegTAP-harvester DaCHS/{api.__version__}")
 
 
 class HarvestContext:
@@ -40,7 +40,9 @@ class HarvestContext:
 	registry table in the regTable attribute.
 	"""
 	fullInterval = datetime.timedelta(days=100)
-	incInterval = datetime.timedelta(days=0.7)
+	# The local mirror is refreshed twice daily by dachs-rr-harvest.timer.
+	# Keep this below the 12-hour timer interval so every scheduled run is due.
+	incInterval = datetime.timedelta(hours=11)
 
 	def __init__(self, regTable, forceFrom=None):
 		self.regTable = regTable
@@ -134,6 +136,12 @@ def _harvestOneFull(dbRec, context):
 	harvestDT = datetime.datetime.utcnow()
 	harvestInto = getDirnameFor(dbRec["ivoid"])+"-harvesting"
 	dirForRegistry = getDirnameFor(dbRec["ivoid"])
+	if os.path.isdir(harvestInto):
+		base.ui.notifyWarning(
+			"Removing stale staging directory %s from an interrupted harvest"
+			% harvestInto)
+		unlinkInDir(harvestInto)
+		os.rmdir(harvestInto)
 	os.mkdir(harvestInto)
 
 	try:

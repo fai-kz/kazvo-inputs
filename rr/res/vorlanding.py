@@ -19,7 +19,7 @@ irkpage, _ = utils.loadPythonModule(
 @functools.cache
 def get_stylesheet():
 	with open(os.path.join(base.getConfig("inputsDir"),
-			"voidoi", "res", "vor-to-landing.xslt"), encoding="utf-8") as f:
+			"rr", "res", "vor-to-landing.xslt"), encoding="utf-8") as f:
 		return lxmletree.XSLT(lxmletree.parse(f))
 
 

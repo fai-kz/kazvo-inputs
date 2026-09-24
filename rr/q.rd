@@ -13,7 +13,7 @@ See README for how to start this from scratch.
 <resource schema="rr">
 	<meta name="creationDate">2012-02-23T12:00:00</meta>
 	<meta name="schema-rank">500</meta>
-	<meta name="title">GAVO RegTAP Service</meta>
+	<meta name="title">KazVO RegTAP Service</meta>
 	<meta name="utype">ivo://ivoa.net/std/regtap#1.2</meta>
 	<meta name="description" format="rst">
 		Tables containing the information in the IVOA Registry.  To query
@@ -27,24 +27,9 @@ See README for how to start this from scratch.
 	</meta>
 	<meta name="subject">virtual-observatories</meta>
 
-	<execute title="harvest registries" every="50000" id="exec-update">
-		<job>
-			<code>
-				execDef.spawnPython("bin/harvestRegistries.py")
-				execDef.spawn(
-					"dachs --ui stingy imp --suppress-meta -c rr/q"
-					" import make_tap_table".split())
-			</code>
-		</job>
-	</execute>
-
-	<execute title="harvest RofR" every="40000">
-		<job>
-			<code>
-				execDef.spawnPython("bin/harvestRofR.py")
-			</code>
-		</job>
-	</execute>
+	<!-- Harvesting is run by dachs-rr-harvest.timer.  Keeping scheduling out
+		of the RD lets systemd serialize scheduled and manual updates through
+		bin/updateRegistry.sh and retain complete logs in the journal. -->
 
 	<table id="registries" onDisk="True" primary="ivoid" adql="True">
 		<meta name="description">
@@ -1224,10 +1209,10 @@ SELECT * FROM fromres) q)
 		<recreateAfter>make_tap_table</recreateAfter>	
 			
 		<publish sets="ivo_managed,local" services="//tap#run">
-			<meta name="mirrorURL">http://reg.g-vo.org/tap</meta>
-			<meta name="mirrorURL">http://dc.g-vo.org/tap</meta>
-			<meta name="mirrorURL">http://gavo.aip.de/tap</meta>
-			<meta name="mirrorURL">http://voparis-rr.obspm.fr:80/tap</meta>
+			<meta name="mirrorURL">https://reg.g-vo.org/tap</meta>
+			<meta name="mirrorURL">https://dc.g-vo.org/tap</meta>
+			<meta name="mirrorURL">https://gavo.aip.de/tap</meta>
+			<meta name="mirrorURL">https://voparis-rr.obspm.fr/tap</meta>
 		</publish>
 		<meta name="resType">registry</meta>
 		<meta name="full">true</meta>
@@ -1258,16 +1243,16 @@ SELECT * FROM fromres) q)
 	</data>
 
 	<service id="pmh" allowed="pubreg.xml">
-		<meta name="title">GAVO DC searchable registry PMH interface</meta>
-		<meta name="shortName">GAVO DC full PMH</meta>
+		<meta name="title">KazVO searchable registry PMH interface</meta>
+		<meta name="shortName">KazVO full PMH</meta>
 		<meta name="description">
-			The OAI-PMH endpoint of the GAVO searchable registry.  This service
+			The OAI-PMH endpoint of the KazVO searchable registry.  This service
 			gives access to the full content of the VO registry using the Open
 			Archive Initiative's protocol for metadata harvesting.  Advanced
 			queries are possible using ADQL in the rr schema at
-			http://dc.g-vo.org/tap.
+			https://dachs.fai.kz/tap.
 
-			For the DC's publishing registry, see http://dc.g-vo.org/oai.xml.
+			For the FAI publishing registry, see https://dachs.fai.kz/oai.xml.
 		</meta>
 		<meta name="resType">registry</meta>
 		<meta name="maxRecords">1000</meta>
@@ -1283,15 +1268,14 @@ SELECT * FROM fromres) q)
 	</service>
 
 	<service id="nmah" allowed="custom" customPage="res/irkpage">
-		<meta name="title">A Resolver for IVOA Identifers (IVOID)</meta>
-		<meta name="shortName">GAVO DC IRK</meta>
+		<meta name="title">A Resolver for IVOA Identifiers (IVOID)</meta>
+		<meta name="shortName">KazVO IRK</meta>
 		<publish sets="local,ivo_managed" render="custom"/>
 		<meta name="description">
 			A service for easy access to VOResource information by IVOID (“resolve
 			IVOA identifiers”) – simply append the IVOID to the base URL of this
-			service.  There is actually a shortcut for this service on the
-			mein GAVO server: Just prepend https://dc.g-vo.org/I/ to an IVOID
-			to get its VOResource rendered.
+			service.  Append an IVOID to the service URL to render the matching
+			VOResource record.
 		</meta>
 		<nullCore/>
 	</service>
@@ -1302,8 +1286,8 @@ SELECT * FROM fromres) q)
 		<meta name="description">
 			A service that turns VOResource into HTML in a way that is
 			supposed to work as a DataCite-style landing page, explaining
-			non-VO experts what access options there may be.  Use it by prepending
-			http://dc.g-vo.org/LP to any ivoid and feeding that to your web
+			non-VO experts what access options there may be.  Append an IVOID to
+			https://dachs.fai.kz/rr/q/lp/custom/ and open the resulting URL in a
 			browser.
 		</meta>
 
@@ -1762,15 +1746,15 @@ information, see also the `RegTAP specification`_
 	<regSuite title="RR regressions">
 		<regTest title="RR registry record looks right">
 			<url metadataPrefix="ivo_vor" verb="GetRecord"
-				identifier="ivo://org.gavo.dc/rr/q/create"
+				identifier="ivo://fai.kz/rr/q/create"
 				>/oai.xml</url>
 			<code><![CDATA[
 				self.assertValidatesXSD()
 				self.assertHasStrings(
 					'xsi:type="vg:Registry"',
-					"<identifier>ivo://org.gavo.dc/rr/q/create</identifier>",
+					"<identifier>ivo://fai.kz/rr/q/create</identifier>",
 					"use `our TAP service`_.",
-					'<relatedResource ivo-id="ivo://org.gavo.dc/tap">',
+					'<relatedResource ivo-id="ivo://fai.kz/tap">',
 					"<full>true</full>",
 					'standardID="ivo://ivoa.net/std/TAP#aux"',
 					"/tap</accessURL>",)
@@ -1783,17 +1767,19 @@ information, see also the `RegTAP specification`_
 				QUERY="SELECT access_url, res_title, mirror_url
 					FROM rr.resource
 					NATURAL JOIN rr.interface
-					WHERE ivoid='ivo://org.gavo.dc/rr/q/create'">/tap/sync</url>
+					WHERE ivoid='ivo://fai.kz/rr/q/create'">/tap/sync</url>
 			<code>
 				rows = self.getVOTableRows()
 				self.assertEqual(len(rows), 1)
-				self.assertEqual(rows[0], {
-					u"access_url": "http://dc.g-vo.org/tap",
-					u"res_title": "GAVO RegTAP Service",
-					u"mirror_url": EqualingRE(
-						"http://reg.g-vo.org/tap#http://gavo.aip.de/tap"
-						"#http://voparis-rr.obspm.fr:80/tap"
-						".*")})
+				self.assertEqual(rows[0]["access_url"],
+					"https://dachs.fai.kz/tap")
+				self.assertEqual(rows[0]["res_title"], "KazVO RegTAP Service")
+				self.assertTrue({
+					"https://reg.g-vo.org/tap",
+					"https://dc.g-vo.org/tap",
+					"https://gavo.aip.de/tap",
+					"https://voparis-rr.obspm.fr/tap",
+				}.issubset(set((rows[0]["mirror_url"] or "").split("#"))))
 			</code>
 		</regTest>
 
@@ -1901,8 +1887,7 @@ by ivoid">/tap/sync</url>
 					getattr(self, "cached parsed tree").xpath("//d:subject",
 						namespaces={"d": self.XPATH_NAMESPACE_MAP["d"]}))
 				self.assertEqual(subjectsFound, {
-					'history-of-astronomy', 'astrophotography',
-					'observational-astronomy', 'interdisciplinary-astronomy'})
+					'history-of-astronomy', 'astrophotography'})
 			</code>
 		</regTest>
 
@@ -1938,8 +1923,7 @@ by ivoid">/tap/sync</url>
 					getattr(self, "cached parsed tree").xpath("//eudc:keyword",
 						namespaces={"eudc": self.XPATH_NAMESPACE_MAP["eudc"]}))
 				self.assertEqual(subjectsFound, {
-					'history-of-astronomy', 'astrophotography',
-					'observational-astronomy', 'interdisciplinary-astronomy'})
+					'history-of-astronomy', 'astrophotography'})
 				
 				# now see if both a WebBrowser interface and the referenceURL are
 				# turned into relatedIdentifiers, the sequence being determined
@@ -1995,7 +1979,7 @@ by ivoid">/tap/sync</url>
 					'<h1 id="doctitle">',
 					'<ol class="inline">',
 					'href="https://adsabs.harvard.edu/abs/2017A&amp;A...600L...4A">',
-					'<a href="https://dc.g-vo.org/I/ivo://org.gavo.dc/hsoy/q/q">ivo://org.gavo.dc/hsoy/q/q</a>',
+					'<a href="https://dachs.fai.kz/rr/q/nmah/custom/ivo://org.gavo.dc/hsoy/q/q">ivo://org.gavo.dc/hsoy/q/q</a>',
 					'<dt>IVOA Cone Search <span class="protocol">SCS</span></dt>',
 					'onclick="return false"')
 			]]></code>

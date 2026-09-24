@@ -24,6 +24,9 @@ class ResourceWrapper(VOR.Resource):
 	"""
 	name_ = "Resource"
 	_a_xsi_type = None
+	# VOResource 1.2 permits a version attribute on the resource element,
+	# while the model shipped with DaCHS 2.11 does not declare it yet.
+	_a_version = None
 
 	_prefix = "ri"
 	_additionalPrefixes = frozenset(["xsi"])
@@ -104,11 +107,11 @@ class MainPage(web.ServiceBasedPage):
 <html xmlns="xmlns=http://www.w3.org/1999/xhtml"
 	xmlns:n="http://nevow.com/ns/nevow/0.1">
 <head>
-	<title>GAVO IVOID resolver: Pass an IVOID</title>
+	<title>KazVO IVOID resolver: Pass an IVOID</title>
 	<n:invisible n:render="commonhead"/>
 </head>
 <body style="max-width:30em">
-	<h1>GAVO IVOID resolver: Pass an IVOID</h1>
+	<h1>KazVO IVOID resolver: Pass an IVOID</h1>
 
 	<p>This service lets you <strong>resolve</strong> IVOA identifiers, i.e., URIs
 	referencing Virtual Observatory resources (they have a URI scheme
@@ -116,16 +119,15 @@ class MainPage(web.ServiceBasedPage):
 	of metadata there, including access options (“capabilities”).</p>
 
 	<p><strong>To do this</strong> resolution, take an IVOID and prepend
-	it with <tt>https://dc.g-vo.org/I/</tt>.</p>
+	it with <tt>https://dachs.fai.kz/rr/q/nmah/custom/</tt>.</p>
 
 	<p><strong>For instance</strong>, to this service is registered as
-	<tt>ivo://org.gavo.dc/rr/q/nmah</tt>.  To see the registry record,
+	<tt>ivo://fai.kz/rr/q/nmah</tt>.  To see the registry record,
 	you would paste
-	<a href="https://dc.g-vo.org/I/ivo://org.gavo.dc/rr/q/nmah"
-		>https://dc.g-vo.org/I/ivo://org.gavo.dc/rr/q/nmah</a>
+	<a href="https://dachs.fai.kz/rr/q/nmah/custom/ivo://fai.kz/rr/q/nmah"
+		>https://dachs.fai.kz/rr/q/nmah/custom/ivo://fai.kz/rr/q/nmah</a>
 	into your web browser's address line.</p>
 
 	<p><a href="/rr/q/nmah/info">More on this service</a>.</p>
 </body>
 </html>""")
-

@@ -1,0 +1,11 @@
+[Unit]
+Description=Update the local IVOA RegTAP registry mirror twice daily
+
+[Timer]
+OnCalendar=*-*-* 02,14:15:00 Asia/Almaty
+RandomizedDelaySec=15m
+Persistent=true
+Unit=dachs-rr-harvest.service
+
+[Install]
+WantedBy=timers.target

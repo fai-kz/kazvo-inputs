@@ -21,8 +21,43 @@ python bin/harvestRegistries.py  # this will run a long time
 # you can watch what's going on in logs/dcInfos
 gavo imp q import # this will run a long time, too
 
-That's about it; the registry should update itself while the server is
-running.
+After the first import, install and enable the systemd timer described below.
+
+
+Scheduled and manual updates
+----------------------------
+
+On lark-obs, ``dachs-rr-harvest.timer`` runs the complete update pipeline
+twice daily (at 02:15 and 14:15 Asia/Almaty time, with up to 15 minutes of
+random delay):
+
+* update the list of publishing registries from the IVOA Registry of
+  Registries;
+* incrementally harvest registries that are due;
+* import newly harvested OAI records into RegTAP;
+* refresh the ``rr.tap_table`` materialized view.
+
+The timer and manual updates use the same entry point and lock, so they cannot
+run concurrently.  From the ``dachsroot`` account, run a normal update with::
+
+  /var/gavo/inputs/rr/bin/updateRegistry.sh
+
+After publishing a local FAI resource, force a complete harvest of the small
+FAI publishing registry and import it immediately with::
+
+  /var/gavo/inputs/rr/bin/updateRegistry.sh --force-local
+
+To force another registry, pass an SQL ``LIKE`` pattern for its registry
+IVOID::
+
+  /var/gavo/inputs/rr/bin/updateRegistry.sh --force 'ivo://example.org/%'
+
+Use ``--force-full`` with the same kind of pattern only when a full re-harvest
+is required.  Inspect scheduled runs with::
+
+  systemctl status dachs-rr-harvest.service --no-pager
+  journalctl -u dachs-rr-harvest.service
+  systemctl list-timers dachs-rr-harvest.timer
 
 
 If you change the data model but want to keep registries meta and

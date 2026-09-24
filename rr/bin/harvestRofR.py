@@ -23,7 +23,7 @@ RDID = "rr/q"
 RD = api.getRD(RDID)
 ROFR_OAI_ENDPOINT = "http://rofr.ivoa.net/oai"
 
-api.setUserAgent(f"GAVO-RegTAP-harvester (IVOA-copy) DaCHS/{api.__version__}")
+api.setUserAgent(f"KazVO-RegTAP-harvester DaCHS/{api.__version__}")
 
 
 AUTHORITY_OVERRIDES = [
@@ -34,6 +34,14 @@ AUTHORITY_OVERRIDES = [
 # These are tuples of (authority, registry ivoid)
 ('jive.eu', 'ivo://jive.eu/__system__/services/registry'),
 ]
+
+# Always harvest our own publishing registry over loopback.  The public
+# reverse proxy can lag behind a just-published record, whereas operators
+# expect --force-local to make a new KazVO publication searchable at once.
+LOCAL_ACCESSURL_OVERRIDES = {
+	'ivo://fai.kz/__system__/services/registry':
+		'http://127.0.0.1:8080/oai.xml',
+}
 
 def updateRegistries(rofrRegistries):
 	"""updates the registries table in the rr schema from the
@@ -60,6 +68,9 @@ def updateRegistries(rofrRegistries):
 
 		# push collected data into the database
 		for rec in rofrRegistries:
+			if rec["ivoid"] in LOCAL_ACCESSURL_OVERRIDES:
+				rec = dict(rec)
+				rec["accessurl"] = LOCAL_ACCESSURL_OVERRIDES[rec["ivoid"]]
 
 			# first stuff any new authorities into the appropriate table
 			# (this works ok because of the dropPolicy)
@@ -162,7 +173,8 @@ def getRegistryRecords():
 		inF = open("ROFR_DEBUG.xml")
 	else:
 		inF = urllib.request.urlopen(ROFR_OAI_ENDPOINT
-			+"?verb=ListRecords&metadataPrefix=ivo_vor&set=ivo_publishers")
+			+"?verb=ListRecords&metadataPrefix=ivo_vor&set=ivo_publishers",
+			timeout=60)
 	parser = _OAIEndpointExtractor()
 	parser.parse(inF)
 	inF.close()
