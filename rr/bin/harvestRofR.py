@@ -38,9 +38,11 @@ AUTHORITY_OVERRIDES = [
 # Always harvest our own publishing registry over loopback.  The public
 # reverse proxy can lag behind a just-published record, whereas operators
 # expect --force-local to make a new KazVO publication searchable at once.
+localPort = int(base.getConfig("web", "serverPort"))
+localOAIURL = "http://127.0.0.1{}".format(
+	"" if localPort==80 else ":{}".format(localPort)) + "/oai.xml"
 LOCAL_ACCESSURL_OVERRIDES = {
-	'ivo://fai.kz/__system__/services/registry':
-		'http://127.0.0.1:8080/oai.xml',
+	'ivo://fai.kz/__system__/services/registry': localOAIURL,
 }
 
 def updateRegistries(rofrRegistries):
