@@ -454,7 +454,10 @@
         
         <map key="T0_OIII" source="T0_[OIII]"/>
         <map key="T0_OIII_err" source="T0_[OIII]_err"/>
-        <map key="T0_OIII_power" source="T0_[OIII]_power"/>
+        <!-- The deployed legacy CSV has this column headed "4" rather than
+             "T0_[OIII]_power".  Prefer the descriptive header when present,
+             but keep importing the existing archive without rewriting it. -->
+        <map key="T0_OIII_power">parseInt(vars.get("T0_[OIII]_power", vars.get("4")))</map>
         <map key="T1_OIII" source="T1_[OIII]"/>
         <map key="T1_OIII_err" source="T1_[OIII]_err"/>
         <map key="T1_OIII_power" source="T1_[OIII]_power"/>
