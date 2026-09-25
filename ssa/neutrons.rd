@@ -94,7 +94,7 @@
 		<make table="main">
 			<rowmaker idmaps="*">
 				<map key="obs_time">@timestamp</map>
-				<map key="source_path">\fullPath</map>
+				<map key="source_path">\inputRelativePath</map>
 				<map key="obs_mjd">dateTimeToMJD(parseISODT(@timestamp))</map>
 				<map key="counts">float(vars["counts/sec"])</map>
 			</rowmaker>

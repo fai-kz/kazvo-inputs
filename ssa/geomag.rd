@@ -112,7 +112,7 @@
 				<map key="b_y">parseWithNull(@By, float, "999999.9")</map>
 				<map key="b_z">parseWithNull(@Bz, float, "999999.9")</map>
 				<map key="obs_time">@timestamp</map> 
-				<map key="source_path">\fullPath</map>
+				<map key="source_path">\inputRelativePath</map>
 				<map key="obs_mjd">dateTimeToMJD(parseISODT(@timestamp))</map>
 			</rowmaker>
 		</make>
