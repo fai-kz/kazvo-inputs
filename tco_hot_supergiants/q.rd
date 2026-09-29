@@ -506,8 +506,8 @@ Primary and scientific data reduction was performed within the IRAF (Image Reduc
     <meta name="shortName">TCO Hot SG SSAP</meta>
     <meta name="ssap.complianceLevel">full</meta>
 
-    <!--publish render="ssap.xml" sets="ivo_managed"/-->
-    <!--publish render="form" sets="ivo_managed,local" service="web"/-->
+    <publish render="ssap.xml" sets="ivo_managed"/>
+    <publish render="form" sets="ivo_managed,local" service="web"/>
 
     <ssapCore queriedTable="data">
       <FEED source="//ssap#hcd_condDescs"/>
