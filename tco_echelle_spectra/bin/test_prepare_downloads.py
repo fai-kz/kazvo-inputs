@@ -31,6 +31,18 @@ class ExportTests(unittest.TestCase):
             out.write_bytes(b'existing output')
             with self.assertRaisesRegex(ValueError,'NAXIS1'):mod.export(src,out)
             self.assertEqual(out.read_bytes(),b'existing output')
+    def test_link_uses_header_beside_actual_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);src=root/'source.fits';link=root/'alias.fits'
+            fits.PrimaryHDU(np.arange(10)).writeto(src)
+            header=fits.getheader(src);header['OBJECT']='Shared corrected header'
+            header.totextfile(str(src)+'.hdr')
+            header['OBJECT']='Stale local header';header.totextfile(str(link)+'.hdr')
+            link.symlink_to(src)
+            mod.export(link,root/'download.fits')
+            self.assertEqual(fits.getheader(root/'download.fits')['OBJECT'],'Shared corrected header')
+            self.assertEqual(fits.Header.fromtextfile(str(link)+'.hdr')['OBJECT'],'Stale local header')
+
     def test_reject_source_overwrite(self):
         with tempfile.TemporaryDirectory() as directory:
             src=Path(directory)/'source.fits'

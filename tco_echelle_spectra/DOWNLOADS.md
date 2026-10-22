@@ -1,7 +1,7 @@
 # FITS downloads with companion headers
 
 Both TCO services now serve a generated FITS copy for each existing product URL.
-Its primary header comes from the adjacent `.fits.hdr`; the original FITS and HDR
+Its primary header comes from the `.fits.hdr` beside the resolved source FITS; the original FITS and HDR
 are never edited. Bytes after the original primary header, including any extension
 HDUs, are copied unchanged and verified by SHA-256. Structural/scaling mismatches
 are errors. CHECKSUM and DATASUM cards are omitted from the new primary header
@@ -20,6 +20,7 @@ After changing source HDRs, regenerate exports BEFORE importing. From
 `/var/gavo/inputs`, on each host:
 
 ```sh
+python3 tco_echelle_spectra/bin/repair_subset_links.py
 python3 tco_echelle_spectra/bin/prepare_downloads.py tco_echelle_spectra/q
 python3 tco_echelle_spectra/bin/prepare_downloads.py tco_hot_supergiants/q
 dachs imp tco_echelle_spectra/q
@@ -51,3 +52,8 @@ separate from the FITS-product mapping and no registry metadata is changed here.
 Historical statements in the original README about downloaded files matching the
 original FITS SHA refer to the original deployment. After this change, source FITS
 hashes still match, but download hashes match `downloads/manifest.json` instead.
+
+The legacy flat subset links on production may point to pre-sort paths. The
+repair helper records their old targets outside Git and atomically retargets only
+broken FITS links to uniquely matched files in reduced/. Old local HDR copies are
+left untouched; the exporter reads the shared HDR beside the resolved FITS.

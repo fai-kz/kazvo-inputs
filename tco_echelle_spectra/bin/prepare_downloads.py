@@ -26,7 +26,7 @@ def tail_digest(path, offset):
 
 
 def export(source, destination):
-    source, destination = Path(source), Path(destination)
+    source, destination = Path(source).resolve(strict=True), Path(destination)
     sidecar = Path(str(source) + '.hdr')
     if destination.resolve() in (source.resolve(), sidecar.resolve()):
         raise ValueError('Output must not replace either source')
