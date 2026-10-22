@@ -1,0 +1,51 @@
+{
+  "HD45314": {
+    "ra": 96.81574336,
+    "dec": 14.88922581,
+    "canonical": "HD  45314",
+    "url": "https://cds.unistra.fr/cgi-bin/nph-sesame/-oxp/S?HD45314",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Sesame xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n xsi:noNamespaceSchemaLocation=\"https://vizier.cds.unistra.fr/xml/sesame_4x.xsd\">\n<Target option=\"S\">\n  <name>HD45314</name>\n  <!-- Q12307543 #1 -->\n  <Resolver name=\"Sc=Simbad (CDS, via client/server)\"><!--delay: 46ms [1] -->\n    <oid>887520</oid>\n    <otype>Be*</otype>\n    <jpos>06:27:15.77 +14:53:21.2</jpos>\n    <jradeg>96.81574336</jradeg>\n    <jdedeg>14.88922581</jdedeg>\n    <refPos>2020yCat.1350....0G</refPos>\n    <errRAmas>0.0321</errRAmas><errDEmas>0.0275</errDEmas>\n    <pm>\n      <v>0.884</v><e>0.052</e><q>A</q><r>2020yCat.1350....0G</r>\n      <pa>234</pa>\n      <pmRA>-0.715</pmRA><epmRA>0.041</epmRA>\n      <pmDE>-0.519</pmDE><epmDE>0.032</epmDE>\n    </pm>\n    <Vel><v>-25.18</v><e>0.93</e><q>B</q><r>2007PASP..119..742B</r></Vel>\n    <plx><v>1.1281</v><e>0.0368</e><q>A</q><r>2020yCat.1350....0G</r></plx>\n    <spType>O9:npe</spType><spNum>0.10005A00.0000.0000001001010000</spNum>\n    <oname>HD  45314</oname>\n    <nrefs>184</nrefs>\n  </Resolver>\n</Target>\n</Sesame>\n<!--- ****Total of 1 crashes -->\n<!-- Configuration tested: /run/sesame.conf -->\n"
+  },
+  "HD7902": {
+    "ra": 19.9655654,
+    "dec": 58.20814546,
+    "canonical": "HD   7902",
+    "url": "https://cds.unistra.fr/cgi-bin/nph-sesame/-oxp/S?HD7902",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Sesame xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n xsi:noNamespaceSchemaLocation=\"https://vizier.cds.unistra.fr/xml/sesame_4x.xsd\">\n<Target option=\"S\">\n  <name>HD7902</name>\n  <!-- Q12307544 #1 -->\n  <Resolver name=\"Sc=Simbad (CDS, via client/server)\"><!--delay: 48ms [2] -->\n    <oid>133953</oid>\n    <otype>s*b</otype>\n    <jpos>01:19:51.73 +58:12:29.3</jpos>\n    <jradeg>19.9655654</jradeg>\n    <jdedeg>58.20814546</jdedeg>\n    <refPos>2020yCat.1350....0G</refPos>\n    <errRAmas>0.0086</errRAmas><errDEmas>0.0117</errDEmas>\n    <pm>\n      <v>1.757</v><e>0.021</e><q>A</q><r>2020yCat.1350....0G</r>\n      <pa>243</pa>\n      <pmRA>-1.560</pmRA><epmRA>0.013</epmRA>\n      <pmDE>-0.809</pmDE><epmDE>0.016</epmDE>\n    </pm>\n    <Vel><v>83.392</v><e>1.469</e><q>B</q><r>2021A&amp;A...647A..19T</r></Vel>\n    <plx><v>0.3679</v><e>0.0169</e><q>A</q><r>2020yCat.1350....0G</r></plx>\n    <spType>B5Iab</spType><spNum>0.00009600.000C.0000000000000000</spNum>\n    <oname>HD   7902</oname>\n    <nrefs>104</nrefs>\n  </Resolver>\n</Target>\n</Sesame>\n<!--- ****Total of 1 crashes -->\n<!-- Configuration tested: /run/sesame.conf -->\n"
+  },
+  "HD14542": {
+    "ra": 35.75177472,
+    "dec": 57.3870057,
+    "canonical": "HD  14542",
+    "url": "https://cds.unistra.fr/cgi-bin/nph-sesame/-oxp/S?HD14542",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Sesame xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n xsi:noNamespaceSchemaLocation=\"https://vizier.cds.unistra.fr/xml/sesame_4x.xsd\">\n<Target option=\"S\">\n  <name>HD14542</name>\n  <!-- Q12307545 #1 -->\n  <Resolver name=\"Sc=Simbad (CDS, via client/server)\"><!--delay: 45ms [1] -->\n    <oid>174077</oid>\n    <otype>s*b</otype>\n    <jpos>02:23:00.42 +57:23:13.2</jpos>\n    <jradeg>35.75177472</jradeg>\n    <jdedeg>57.3870057</jdedeg>\n    <refPos>2020yCat.1350....0G</refPos>\n    <errRAmas>0.0110</errRAmas><errDEmas>0.0135</errDEmas>\n    <pm>\n      <v>1.264</v><e>0.023</e><q>A</q><r>2020yCat.1350....0G</r>\n      <pa>215</pa>\n      <pmRA>-0.719</pmRA><epmRA>0.015</epmRA>\n      <pmDE>-1.040</pmDE><epmDE>0.017</epmDE>\n    </pm>\n    <Vel><v>-50.9</v><e>0.4</e><q>A</q><r>2020A&amp;A...643A.116D</r></Vel>\n    <plx><v>0.4389</v><e>0.02</e><q>A</q><r>2020yCat.1350....0G</r></plx>\n    <spType>B8Iab</spType><spNum>0.0000B400.000C.0000000000000000</spNum>\n    <oname>HD  14542</oname>\n    <nrefs>121</nrefs>\n  </Resolver>\n</Target>\n</Sesame>\n<!--- ****Total of 1 crashes -->\n<!-- Configuration tested: /run/sesame.conf -->\n"
+  },
+  "HD14322": {
+    "ra": 35.17882788,
+    "dec": 55.90907795,
+    "canonical": "HD  14322",
+    "url": "https://cds.unistra.fr/cgi-bin/nph-sesame/-oxp/S?HD14322",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Sesame xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n xsi:noNamespaceSchemaLocation=\"https://vizier.cds.unistra.fr/xml/sesame_4x.xsd\">\n<Target option=\"S\">\n  <name>HD14322</name>\n  <!-- Q12307546 #1 -->\n  <Resolver name=\"Sc=Simbad (CDS, via client/server)\"><!--delay: 44ms [1] -->\n    <oid>136511</oid>\n    <otype>s*b</otype>\n    <jpos>02:20:42.91 +55:54:32.6</jpos>\n    <jradeg>35.17882788</jradeg>\n    <jdedeg>55.90907795</jdedeg>\n    <refPos>2020yCat.1350....0G</refPos>\n    <errRAmas>0.0102</errRAmas><errDEmas>0.0131</errDEmas>\n    <pm>\n      <v>1.484</v><e>0.022</e><q>A</q><r>2020yCat.1350....0G</r>\n      <pa>203</pa>\n      <pmRA>-0.581</pmRA><epmRA>0.014</epmRA>\n      <pmDE>-1.365</pmDE><epmDE>0.017</epmDE>\n    </pm>\n    <Vel><v>-33.4</v><e>0.4</e><q>A</q><r>2020A&amp;A...643A.116D</r></Vel>\n    <plx><v>0.4022</v><e>0.0188</e><q>A</q><r>2020yCat.1350....0G</r></plx>\n    <spType>B8Iab</spType><spNum>0.0000B400.000C.0000000000000000</spNum>\n    <oname>HD  14322</oname>\n    <nrefs>99</nrefs>\n  </Resolver>\n</Target>\n</Sesame>\n<!--- ****Total of 1 crashes -->\n<!-- Configuration tested: /run/sesame.conf -->\n"
+  },
+  "HD9311": {
+    "ra": 23.30835521,
+    "dec": 60.68643741,
+    "canonical": "HD   9311",
+    "url": "https://cds.unistra.fr/cgi-bin/nph-sesame/-oxp/S?HD9311",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Sesame xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n xsi:noNamespaceSchemaLocation=\"https://vizier.cds.unistra.fr/xml/sesame_4x.xsd\">\n<Target option=\"S\">\n  <name>HD9311</name>\n  <!-- Q12307548 #1 -->\n  <Resolver name=\"Sc=Simbad (CDS, via client/server)\"><!--delay: 43ms [2] -->\n    <oid>168390</oid>\n    <otype>s*b</otype>\n    <jpos>01:33:14.00 +60:41:11.1</jpos>\n    <jradeg>23.30835521</jradeg>\n    <jdedeg>60.68643741</jdedeg>\n    <refPos>2020yCat.1350....0G</refPos>\n    <errRAmas>0.0108</errRAmas><errDEmas>0.0134</errDEmas>\n    <pm>\n      <v>1.496</v><e>0.023</e><q>A</q><r>2020yCat.1350....0G</r>\n      <pa>241</pa>\n      <pmRA>-1.302</pmRA><epmRA>0.014</epmRA>\n      <pmDE>-0.736</pmDE><epmDE>0.018</epmDE>\n    </pm>\n    <Vel><v>-43.40</v><e>1.2</e><q>B</q><r>2006AstL...32..759G</r></Vel>\n    <plx><v>0.3440</v><e>0.0191</e><q>A</q><r>2020yCat.1350....0G</r></plx>\n    <spType>B5Ib</spType><spNum>0.00009600.0010.0000000000000000</spNum>\n    <oname>HD   9311</oname>\n    <nrefs>92</nrefs>\n  </Resolver>\n</Target>\n</Sesame>\n<!--- ****Total of 1 crashes -->\n<!-- Configuration tested: /run/sesame.conf -->\n"
+  },
+  "HR2839": {
+    "ra": 111.33322648,
+    "dec": -21.98258944,
+    "canonical": "HD  58585",
+    "url": "https://cds.unistra.fr/cgi-bin/nph-sesame/-oxp/S?HR2839",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Sesame xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n xsi:noNamespaceSchemaLocation=\"https://vizier.cds.unistra.fr/xml/sesame_4x.xsd\">\n<Target option=\"S\">\n  <name>HR2839</name>\n  <!-- Q12307549 #1 -->\n  <Resolver name=\"Sc=Simbad (CDS, via client/server)\"><!--delay: 36ms [2] -->\n    <oid>977938</oid>\n    <otype>*</otype>\n    <jpos>07:25:19.97 -21:58:57.3</jpos>\n    <jradeg>111.33322648</jradeg>\n    <jdedeg>-21.98258944</jdedeg>\n    <refPos>2020yCat.1350....0G</refPos>\n    <errRAmas>0.0123</errRAmas><errDEmas>0.0164</errDEmas>\n    <pm>\n      <v>4.794</v><e>0.030</e><q>A</q><r>2020yCat.1350....0G</r>\n      <pa>324.2</pa>\n      <pmRA>-2.806</pmRA><epmRA>0.018</epmRA>\n      <pmDE>3.887</pmDE><epmDE>0.024</epmDE>\n    </pm>\n    <Vel><v>38.12</v><e>0.13</e><q>A</q><r>2022yCat.1355....0G</r></Vel>\n    <plx><v>0.6759</v><e>0.0220</e><q>A</q><r>2020yCat.1350....0G</r></plx>\n    <spType>A5/7II</spType><spNum>0.02010400.0018.0000000000000000</spNum>\n    <oname>HD  58585</oname>\n    <nrefs>36</nrefs>\n  </Resolver>\n</Target>\n</Sesame>\n<!--- ****Total of 1 crashes -->\n<!-- Configuration tested: /run/sesame.conf -->\n"
+  },
+  "HD58131": {
+    "ra": 110.8521155,
+    "dec": -20.23032737,
+    "canonical": "HD  58131",
+    "url": "https://cds.unistra.fr/cgi-bin/nph-sesame/-oxp/S?HD58131",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Sesame xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n xsi:noNamespaceSchemaLocation=\"https://vizier.cds.unistra.fr/xml/sesame_4x.xsd\">\n<Target option=\"S\">\n  <name>HD58131</name>\n  <!-- Q12307550 #1 -->\n  <Resolver name=\"Sc=Simbad (CDS, via client/server)\"><!--delay: 34ms [3] -->\n    <oid>977184</oid>\n    <otype>Em*</otype>\n    <jpos>07:23:24.50 -20:13:49.1</jpos>\n    <jradeg>110.8521155</jradeg>\n    <jdedeg>-20.23032737</jdedeg>\n    <refPos>2020yCat.1350....0G</refPos>\n    <errRAmas>0.0129</errRAmas><errDEmas>0.0195</errDEmas>\n    <pm>\n      <v>3.686</v><e>0.038</e><q>A</q><r>2020yCat.1350....0G</r>\n      <pa>323</pa>\n      <pmRA>-2.227</pmRA><epmRA>0.025</epmRA>\n      <pmDE>2.937</pmDE><epmDE>0.029</epmDE>\n    </pm>\n    <Vel><v>44.00</v><e>7.4</e><q>D</q><r>2007AN....328..889K</r></Vel>\n    <plx><v>0.2896</v><e>0.0282</e><q>A</q><r>2020yCat.1350....0G</r></plx>\n    <spType>B9Iab</spType><spNum>0.0000BE00.000C.0000000000000000</spNum>\n    <oname>HD  58131</oname>\n    <nrefs>38</nrefs>\n  </Resolver>\n</Target>\n</Sesame>\n<!--- ****Total of 1 crashes -->\n<!-- Configuration tested: /run/sesame.conf -->\n"
+  }
+}
