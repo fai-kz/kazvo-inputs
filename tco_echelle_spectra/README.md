@@ -81,8 +81,22 @@ SSA and the web service were published through `dachs pub`.
 On lark-obs, run the HDR generator with an explicit source directory, first
 with `--dry-run`. It preserves existing RA_ICRS/DEC_ICRS correction cards.
 Review and resolve any new coordinate conflicts before metadata preparation.
-On lark, run `bin/prepare_metadata.py SOURCE RESOURCE --previews`, then
+On lark, run `bin/prepare_metadata.py SOURCE RESOURCE`, then
 `dachs val -p tco_echelle_spectra/q`, `dachs imp tco_echelle_spectra/q`,
 `dachs pub tco_echelle_spectra/q` and live verification. The embedded regression
 count (837) must be updated when the intentionally published inventory changes.
 Do not use the old copied helpers on lark-obs: they target tco_hot_supergiants.
+
+## Preview generation
+
+DaCHS is the only preview generator. `prepare_metadata.py` writes metadata.json
+and does not create or overwrite PNGs; its former --previews option is removed.
+On lark-obs, generate black thumbnails with:
+
+```sh
+python3 bin/makePreviews.py --force --bail
+```
+
+Commit service source changes on lark-obs, push to GitHub, and pull them on lark.
+Run the same preview command on lark; PNGs are generated locally and ignored by Git.
+The preview files are used directly and do not require a data reimport.
