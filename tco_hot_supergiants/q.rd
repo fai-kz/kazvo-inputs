@@ -290,7 +290,8 @@ Primary and scientific data reduction was performed within the IRAF (Image Reduc
       <rowfilter procDef="//products#define">
         <bind key="table">"\schema.raw_data"</bind>
         <bind key="accref">\inputRelativePath{True}</bind>
-        <bind key="fsize">180000</bind>
+        <bind key="path">"\schema/downloads/"+os.path.basename(rowIter.sourceToken)</bind>
+        <bind key="fsize">os.path.getsize(rd.getAbsPath("downloads/"+os.path.basename(rowIter.sourceToken)))</bind>
         <bind key="mime">"application/fits"</bind>
         <bind key="preview">\splitPreviewPath{png}</bind>
       </rowfilter>

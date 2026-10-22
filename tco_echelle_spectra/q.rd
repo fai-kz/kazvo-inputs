@@ -266,6 +266,8 @@ existing collection documentation, not measured separately for each spectrum.
       <rowfilter procDef="//products#define">
         <bind key="table">"\schema.raw_data"</bind>
         <bind key="accref">\inputRelativePath{True}</bind>
+        <bind key="path">"\schema/downloads/"+os.path.basename(rowIter.sourceToken)</bind>
+        <bind key="fsize">os.path.getsize(rd.getAbsPath("downloads/"+os.path.basename(rowIter.sourceToken)))</bind>
         <bind key="mime">"application/fits"</bind>
         <bind key="preview">"tco_echelle_spectra/previews/"+row["origfile"]+".png"</bind>
         <bind key="preview_mime">"image/png"</bind>
