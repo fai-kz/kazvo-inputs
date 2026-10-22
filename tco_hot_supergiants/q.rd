@@ -335,7 +335,7 @@ Primary and scientific data reduction was performed within the IRAF (Image Reduc
         <map key="ssa_length">vars.get("hdr_NAXIS1") or vars.get("NAXIS1")</map>
         <map key="ssa_timeExt">vars.get("hdr_EXPTIME") or vars.get("EXPTIME") or vars.get("EXPOSURE")</map>
         <map key="ssa_specres">vars["specResM"]</map>
-        <map key="ssa_pubDID">vars.get("hdr_PUBDID")</map>
+        <map key="ssa_pubDID">vars.get("hdr_PUBDID") or \standardPubDID</map>
         <map key="datalink">\dlMetaURI{sdl}</map>
 
         <map key="wave_min">vars["waveMinM"]</map>
@@ -506,8 +506,8 @@ Primary and scientific data reduction was performed within the IRAF (Image Reduc
     <meta name="shortName">TCO Hot SG SSAP</meta>
     <meta name="ssap.complianceLevel">full</meta>
 
-    <!--publish render="ssap.xml" sets="ivo_managed"/-->
-    <!--publish render="form" sets="ivo_managed,local" service="web"/-->
+    <publish render="ssap.xml" sets="ivo_managed"/>
+    <publish render="form" sets="ivo_managed,local" service="web"/>
 
     <ssapCore queriedTable="data">
       <FEED source="//ssap#hcd_condDescs"/>

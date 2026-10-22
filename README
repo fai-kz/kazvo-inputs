@@ -10,3 +10,17 @@ like this::
 
 You will then need to do a few symlinks into the common datastore.
 TBD: do we give the commands to do that here or in each individual repo.
+
+Testing on lark
+---------------
+
+Run all regression suites tracked by this repository with::
+
+  ./test-all-tracked.sh
+
+Do not use ``dachs test ALL`` on lark.  The configured public URL is not
+reachable from the host itself, and ``ALL`` also walks mounted data trees
+(including NAS snapshot directories).  The helper limits discovery to
+Git-tracked resource descriptors, sends requests to the local DaCHS
+listener at ``http://127.0.0.1``, and runs them serially to avoid transient
+failures from overloading the production TAP service.

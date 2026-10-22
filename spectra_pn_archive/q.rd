@@ -93,8 +93,10 @@
     <property key="previewDir">previews</property>
     <!--<sources recurse="True"
       pattern="/var/gavo/inputs/astroplates/spectra_pn_archive/reducted_spectra_pn/*.fits"/>-->
-    <sources recurse="True"
-      pattern="/var/gavo/inputs/spectra_pn_archive/data/*.fits"/>
+    <!-- All product links are directly below data/.  Keeping this
+         non-recursive also prevents DaCHS from recursively following a
+         broken product symlink as though it were a directory. -->
+    <sources pattern="data/*.fits"/>
     
     <fitsProdGrammar qnd="True">
       <rowfilter procDef="//products#define">
