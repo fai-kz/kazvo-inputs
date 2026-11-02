@@ -84,6 +84,17 @@ SSA and the web service were published through `dachs pub`.
   descriptor's scalar MIN/MAX bounds. Public responses parse without warnings
   in Astropy 8; spectral extraction/cutout tests pass in both environments.
 
+## Live FITS/HDR deployment verification (2026-11-02)
+
+- All 905 FITS/HDR pairs parsed successfully; dataset names are unique.
+- Database counts are 905 in raw data, the SSA view, `dc.products` and ObsCore.
+- All 68 missing previews were generated; the cache now contains 905 PNGs.
+- Public web, SSA and generated FITS responses returned HTTP 200.
+- A generated FITS passed strict Astropy verification and preserved the source
+  data payload byte-for-byte.
+- The server-side temporary FITS was removed after its HTTP response completed.
+- The separately published hot-supergiant view remained unchanged at 512 rows.
+
 ## Updating the collection
 
 On lark-obs, run the HDR generator with an explicit source directory. Use
