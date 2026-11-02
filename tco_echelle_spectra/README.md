@@ -1,4 +1,4 @@
-# TCO Echelle Spectral Archive — published 2026-10-22
+# TCO Echelle Spectral Archive
 
 Public service host: **lark**, DaCHS 2.13.
 Preparation host: **lark-obs**, DaCHS 2.11 (its HTTP daemon was inactive).
@@ -15,9 +15,9 @@ on lark-obs was not overwritten; use the preparation package for that host.
 No import/publication was performed on lark-obs. The public deployment was
 performed on lark, which has access to the same shared source spectra.
 
-## Source integrity and HDR preparation
+## Authoritative inputs
 
-837 spectra are linked from
+905 spectra are linked from
 `/var/gavo/inputs/observations/others/tco/spectra_echelle/targets`.
 The resource's `data` entry is a symlink; no source FITS copies were created for
 publication. Existing hot-supergiant resource and its 512 rows were preserved.
@@ -45,12 +45,20 @@ Two blank target names use filename prefixes, explicitly recorded in the table.
 
 ## Metadata and service behavior
 
-`bin/prepare_metadata.py` reads the original linear IRAF WCS, including CRPIX1,
-and exposure from FITS; it reads reduction flags and catalog positions from
-HDR sidecars. The collection-wide reduction flags in the user's HDR generator
-are preserved as supplied metadata, not inferred independently from pixels.
-The service reads the reviewed metadata.json snapshot and serves original FITS.
+The source FITS and its adjacent `.fits.hdr` file are the only authoritative
+inputs. During `dachs imp`, `bin/tco_live.py` reads the linear IRAF WCS,
+exposure, reduction flags, object name and reviewed coordinates directly from
+the sidecar. There is no `metadata.json` snapshot to refresh.
+
+For a download request, DaCHS combines the immutable source data bytes with the
+current HDR header in a temporary FITS file. It verifies that the data payload
+is byte-identical and deletes the temporary file after the HTTP response.
+There is no persistent `downloads/` tree.
+
 Previews plot original wavelength/flux samples without resampling or smoothing.
+DaCHS creates only missing PNGs automatically after a successful import. The
+PNG cache remains on disk because DaCHS' generic `AUTO` preview does not render
+one-dimensional spectra on demand.
 Relative flux is not presented as absolute calibrated flux or normalized flux.
 The inherited telescope-aperture diameter is not used as an angular sky footprint.
 
@@ -59,7 +67,7 @@ modified. The original example's whitelist and insertion into an SSA view were
 removed. Standard publisher dataset IDs and actual FITS sizes are supplied.
 SSA and the web service were published through `dachs pub`.
 
-## Verification completed
+## Historical verification (2026-10-22)
 
 - Header repair tests: 3 passed locally; FITS originals unchanged.
 - Descriptor pre-publication validation passed on DaCHS 2.11 and 2.13.
@@ -76,27 +84,29 @@ SSA and the web service were published through `dachs pub`.
   descriptor's scalar MIN/MAX bounds. Public responses parse without warnings
   in Astropy 8; spectral extraction/cutout tests pass in both environments.
 
-## Subsequent updates
+## Updating the collection
 
-On lark-obs, run the HDR generator with an explicit source directory, first
-with `--dry-run`. It preserves existing RA_ICRS/DEC_ICRS correction cards.
-Review and resolve any new coordinate conflicts before metadata preparation.
-On lark, run `bin/prepare_metadata.py SOURCE RESOURCE`, then
-`dachs val -p tco_echelle_spectra/q`, `dachs imp tco_echelle_spectra/q`,
-`dachs pub tco_echelle_spectra/q` and live verification. The embedded regression
-count (837) must be updated when the intentionally published inventory changes.
-Do not use the old copied helpers on lark-obs: they target tco_hot_supergiants.
+On lark-obs, run the HDR generator with an explicit source directory. Use
+`--dry-run` first for a new batch and `--only-missing` when existing reviewed
+sidecars must not be rewritten. The generator preserves existing
+RA_ICRS/DEC_ICRS correction cards.
 
-## Preview generation
-
-DaCHS is the only preview generator. `prepare_metadata.py` writes metadata.json
-and does not create or overwrite PNGs; its former --previews option is removed.
-On lark-obs, generate black thumbnails with:
+Then, on lark, run:
 
 ```sh
-python3 bin/makePreviews.py --force --bail
+cd /var/gavo/inputs
+dachs val -p tco_echelle_spectra/q
+dachs imp tco_echelle_spectra/q
+dachs pub tco_echelle_spectra/q
+dachs test -v tco_echelle_spectra/q
 ```
 
-Commit service source changes on lark-obs, push to GitHub, and pull them on lark.
-Run the same preview command on lark; PNGs are generated locally and ignored by Git.
-The preview files are used directly and do not require a data reimport.
+Import reads FITS/HDR pairs live and generates missing previews. Update the
+embedded regression count only when the intentionally published inventory
+changes.
+
+## Preview recovery
+
+Normal imports create missing previews automatically. PNG files are generated
+locally and ignored by Git. If the cache is lost, rerunning `dachs imp` rebuilds
+the missing PNGs without changing the FITS/HDR sources.

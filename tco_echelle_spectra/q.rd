@@ -253,21 +253,30 @@ existing collection documentation, not measured separately for each spectrum.
     <sources pattern="data/*/*/reduced/*.fits"/>
     <embeddedGrammar>
       <iterator>
-        <setup imports="json,os">
+        <setup>
           <code>
-            with open(rd.getAbsPath("metadata.json")) as stream:
-                metadata = {os.path.basename(k): v for k, v in json.load(stream).items()}
+            import importlib.util
+            import pathlib
+
+            helperPath = rd.getAbsPath("bin/tco_live.py")
+            helperSpec = importlib.util.spec_from_file_location(
+              "tco_echelle_live", helperPath)
+            helper = importlib.util.module_from_spec(helperSpec)
+            helperSpec.loader.exec_module(helper)
+            sourceRoot = pathlib.Path(rd.getAbsPath("data"))
           </code>
         </setup>
         <code>
-          yield dict(metadata[os.path.basename(self.sourceToken)])
+          yield helper.read_metadata(pathlib.Path(self.sourceToken), sourceRoot)
         </code>
       </iterator>
       <rowfilter procDef="//products#define">
         <bind key="table">"\schema.raw_data"</bind>
         <bind key="accref">\inputRelativePath{True}</bind>
-        <bind key="path">"\schema/downloads/"+os.path.basename(rowIter.sourceToken)</bind>
-        <bind key="fsize">os.path.getsize(rd.getAbsPath("downloads/"+os.path.basename(rowIter.sourceToken)))</bind>
+        <bind key="path">makeAbsoluteURL(
+          "\rdId/fitsdl/dlget?ID="+urllib.parse.quote(
+            getStandardPubDID(\inputRelativePath{True})), canonical=True)</bind>
+        <bind key="fsize">@merged_size</bind>
         <bind key="mime">"application/fits"</bind>
         <bind key="preview">"tco_echelle_spectra/previews/"+row["origfile"]+".png"</bind>
         <bind key="preview_mime">"image/png"</bind>
@@ -290,6 +299,20 @@ existing collection documentation, not measured separately for each spectrum.
         <map key="ssa_pubDID">getStandardPubDID(@prodtblAccref)</map>
         <map key="datalink">\dlMetaURI{sdl}</map>
       </rowmaker>
+      <script type="postCreation" lang="python" name="build missing previews">
+        import importlib.util
+        from pathlib import Path
+        from gavo import base
+
+        resource = Path(base.getConfig("inputsDir")) / "tco_echelle_spectra"
+        helperPath = resource / "bin" / "tco_live.py"
+        helperSpec = importlib.util.spec_from_file_location(
+          "tco_echelle_live_previews", helperPath)
+        helper = importlib.util.module_from_spec(helperSpec)
+        helperSpec.loader.exec_module(helper)
+        created = helper.ensure_previews(resource / "data", resource / "previews")
+        base.ui.notifyInfo("Created %d missing TCO spectral previews" % created)
+      </script>
     </make>
   </data>
 
@@ -400,6 +423,45 @@ existing collection documentation, not measured separately for each spectrum.
     </datalinkCore>
   </service>
 
+  <service id="fitsdl" allowed="dlget">
+    <meta name="shortName">TCO Echelle FITS</meta>
+    <meta name="title">TCO Echelle temporary FITS download</meta>
+    <meta name="description">
+      Builds a temporary FITS file from the immutable source data and its
+      neighbouring HDR sidecar.  The temporary file is removed after delivery.
+    </meta>
+
+    <datalinkCore>
+      <descriptorGenerator procDef="//soda#sdm_genDesc">
+        <bind key="ssaTD">"\rdId#data"</bind>
+      </descriptorGenerator>
+
+      <dataFunction>
+        <setup>
+          <code>
+            import importlib.util
+            import pathlib
+            from gavo import base
+
+            helperPath = pathlib.Path(base.getConfig("inputsDir")) / \
+              "tco_echelle_spectra" / "bin" / "tco_live.py"
+            helperSpec = importlib.util.spec_from_file_location(
+              "tco_echelle_live_download", helperPath)
+            helper = importlib.util.module_from_spec(helperSpec)
+            helperSpec.loader.exec_module(helper)
+          </code>
+        </setup>
+        <code>
+          source = pathlib.Path(base.getConfig("inputsDir")) / \
+            descriptor.ssaRow["accref"]
+          temporary = helper.make_temporary_fits(source)
+          descriptor.data = TemporaryFile(str(temporary), "application/fits")
+          raise DeliverNow
+        </code>
+      </dataFunction>
+    </datalinkCore>
+  </service>
+
 
   <service id="web" defaultRenderer="form">
     <meta name="shortName">TCO Echelle Web</meta>
@@ -437,10 +499,10 @@ existing collection documentation, not measured separately for each spectrum.
   </service>
 
   <regSuite title="TCO full collection regression">
-    <regTest title="Full archive contains all 837 spectra">
+    <regTest title="Full archive contains all 905 spectra">
       <url REQUEST="queryData" MAXREC="1000">ssa/ssap.xml</url>
       <code>
-        self.assertEqual(len(self.getVOTableRows()), 837)
+        self.assertEqual(len(self.getVOTableRows()), 905)
       </code>
     </regTest>
     <regTest title="New ZIP target available">
