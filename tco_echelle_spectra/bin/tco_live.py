@@ -199,7 +199,10 @@ def make_temporary_fits(source: Path) -> Path:
 
 def ensure_previews(root: Path, preview_dir: Path) -> int:
     """Create only missing spectral PNG previews using DaCHS' plot helper."""
-    from gavo.helpers.processing import OneDPreviewMaker
+    try:
+        from gavo.helpers.processing import OneDPreviewMaker as PreviewPlotter
+    except ImportError:  # DaCHS 2.11
+        from gavo.helpers.processing import SpectralPreviewMaker as PreviewPlotter
 
     preview_dir.mkdir(parents=True, exist_ok=True)
     created = 0
@@ -219,7 +222,8 @@ def ensure_previews(root: Path, preview_dir: Path) -> int:
             ((crval + (index + 1 - crpix) * delta) * 1e-10, float(value))
             for index, value in enumerate(flux)
         ]
-        payload = OneDPreviewMaker.get2DPlot(points, linear=False, connectPoints=True)
+        payload = PreviewPlotter.get2DPlot(
+            points, linear=False, connectPoints=True)
         fd, temporary_name = tempfile.mkstemp(prefix=".preview-", dir=preview_dir)
         temporary = Path(temporary_name)
         try:
